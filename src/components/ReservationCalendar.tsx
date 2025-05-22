@@ -43,8 +43,8 @@ const ReservationCalendar: React.FC<ReservationCalendarProps> = ({ reservations 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       <div className="md:col-span-1">
-        <Card className="overflow-hidden">
-          <CardContent className="p-1 md:p-0">
+        <Card className="w-full md:min-w-[300px]">
+          <CardContent className="p-1 md:p-2">
             <Calendar
               mode="single"
               selected={selectedDate}
@@ -68,18 +68,19 @@ const ReservationCalendar: React.FC<ReservationCalendarProps> = ({ reservations 
                 checkOut: "border-r-4 border-amber-500"
               }}
               footer={
-                <div className="text-center text-xs space-y-1 mt-2 text-muted-foreground p-2">
+                <div className="text-center text-xs space-y-2 mt-3 text-muted-foreground p-2 bg-muted/30 rounded-md">
+                  <h4 className="font-medium text-sm mb-1">Calendar Legend</h4>
                   <div className="flex items-center justify-center gap-2">
-                    <div className="w-3 h-3 bg-accent/30 rounded-sm"></div>
-                    <span>Booked</span>
+                    <div className="w-4 h-4 bg-accent/30 rounded-sm"></div>
+                    <span>Room is occupied on this date</span>
                   </div>
                   <div className="flex items-center justify-center gap-2">
-                    <div className="w-3 h-3 border-l-2 border-green-500 pl-1">|</div>
-                    <span>Check-in</span>
+                    <div className="w-4 h-4 border-l-4 border-green-500 pl-1 rounded-sm">|</div>
+                    <span>Guest arrival / Check-in date</span>
                   </div>
                   <div className="flex items-center justify-center gap-2">
-                    <div className="w-3 h-3 border-r-2 border-amber-500 pr-1">|</div>
-                    <span>Check-out</span>
+                    <div className="w-4 h-4 border-r-4 border-amber-500 pr-1 rounded-sm">|</div>
+                    <span>Guest departure / Check-out date</span>
                   </div>
                 </div>
               }
