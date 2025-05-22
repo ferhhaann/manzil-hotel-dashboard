@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -317,7 +318,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
 
       {/* View Room Details Dialog - Now with Edit Functionality */}
       <Dialog open={isViewDetailsOpen} onOpenChange={setIsViewDetailsOpen}>
-        <DialogContent className="sm:max-w-lg">
+        <DialogContent className="sm:max-w-4xl">
           <DialogHeader>
             <DialogTitle>Room {roomNumber} Details</DialogTitle>
             <DialogDescription>View and edit room information</DialogDescription>
