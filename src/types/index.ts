@@ -45,3 +45,27 @@ export interface User {
   name: string;
   role: 'admin' | 'staff';
 }
+
+// New reservation-related types
+export type ReservationStatus = 'Confirmed' | 'Pending' | 'Cancelled' | 'Checked-in' | 'Checked-out';
+
+export interface Reservation {
+  id: string;
+  guestName: string;
+  guestEmail: string;
+  guestPhone: string;
+  roomNumbers: number[];
+  checkInDate: Date;
+  checkOutDate: Date;
+  adults: number;
+  children: number;
+  specialRequests?: string;
+  status: ReservationStatus;
+  createdAt: Date;
+  updatedAt: Date;
+  totalAmount: number;
+  advanceAmount: number;
+  paymentStatus: 'Pending' | 'Partially Paid' | 'Paid';
+  paymentMethod: PaymentMethod;
+  source: 'Direct' | 'Website' | 'OTA' | 'Phone' | 'Walk-in';
+}
