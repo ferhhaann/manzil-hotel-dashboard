@@ -55,7 +55,6 @@ const getStatusBadgeClass = (status: RoomStatus): string => {
 
 const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, onCheckOut }) => {
   const { roomNumber, type, status, guest } = room;
-  const [isStatusDialogOpen, setIsStatusDialogOpen] = useState(false);
   const [isViewDetailsOpen, setIsViewDetailsOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editableGuest, setEditableGuest] = useState<Partial<Guest> | null>(null);
@@ -64,7 +63,6 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
   const handleStatusChange = (newStatus: RoomStatus) => {
     if (status !== newStatus) {
       onStatusUpdate(roomNumber, newStatus);
-      setIsStatusDialogOpen(false);
     }
   };
 
@@ -179,6 +177,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
     }
   }, [editableGuest]);
 
+  
   return (
     <Card className={`w-full shadow-sm overflow-hidden flex flex-col h-full border-2 ${getCardClass(status)}`}>
       <CardHeader className="p-2 pb-0">
@@ -392,7 +391,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
                     <Input
                       id="editName"
                       name="name"
-                      value={editableGuest.name}
+                      value={editableGuest.name || ""}
                       onChange={handleInputChange}
                       required
                     />
@@ -403,7 +402,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
                     <Input
                       id="editPhone"
                       name="phone"
-                      value={editableGuest.phone}
+                      value={editableGuest.phone || ""}
                       onChange={handleInputChange}
                       required
                     />
@@ -414,7 +413,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
                     <Input
                       id="editBillNumber"
                       name="billNumber"
-                      value={editableGuest.billNumber}
+                      value={editableGuest.billNumber || ""}
                       onChange={handleInputChange}
                       required
                     />
@@ -444,7 +443,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
                     <Input
                       id="editAddress"
                       name="address"
-                      value={editableGuest.address}
+                      value={editableGuest.address || ""}
                       onChange={handleInputChange}
                       required
                     />
