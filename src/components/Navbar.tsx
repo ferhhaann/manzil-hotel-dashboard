@@ -21,7 +21,14 @@ const Navbar = () => {
     <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur">
       <div className="container flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-2">
-          <span className="text-2xl font-bold hotel-title">Manzil Hotel</span>
+          <Link to="/" className="flex items-center gap-2">
+            <img 
+              src="/lovable-uploads/aabbf551-1fea-4b30-9bdc-62fe62e54f5d.png" 
+              alt="Manzil Hotel Logo" 
+              className="h-10" 
+            />
+            <span className="text-2xl font-bold hotel-title">Manzil Hotel</span>
+          </Link>
         </div>
 
         <nav className="hidden md:flex items-center gap-6">
