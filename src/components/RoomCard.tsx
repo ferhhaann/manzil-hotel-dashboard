@@ -45,43 +45,43 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
   };
 
   return (
-    <Card className={`w-full shadow-md overflow-hidden flex flex-col h-full border-2 ${getCardClass(status)}`}>
-      <CardHeader className="p-4 pb-0">
+    <Card className={`w-full shadow-sm overflow-hidden flex flex-col h-full border-2 ${getCardClass(status)}`}>
+      <CardHeader className="p-2 pb-0">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-xl">Room {roomNumber}</CardTitle>
-          <span className="text-sm font-medium bg-accent/20 px-3 py-1 rounded-full text-accent-foreground">
+          <CardTitle className="text-base">Room {roomNumber}</CardTitle>
+          <span className="text-xs font-medium bg-accent/20 px-2 py-0.5 rounded-full text-accent-foreground">
             {type}
           </span>
         </div>
-        <div className="mt-2">
-          <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusBadgeClass(status)}`}>{status}</span>
+        <div className="mt-1">
+          <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${getStatusBadgeClass(status)}`}>{status}</span>
         </div>
       </CardHeader>
       
-      <CardContent className="p-4 flex-grow">
+      <CardContent className="p-2 flex-grow text-xs">
         {status === "Occupied" && guest && (
-          <div className="space-y-2 text-sm">
+          <div className="space-y-1 text-xs">
             <p className="font-semibold text-primary">{guest.name}</p>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-0.5">
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Check-in:</span>
-                <span>{format(new Date(guest.checkInDate), "dd MMM yyyy")}</span>
+                <span className="text-muted-foreground">In:</span>
+                <span>{format(new Date(guest.checkInDate), "dd MMM")}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Check-out:</span>
-                <span>{format(new Date(guest.checkOutDate), "dd MMM yyyy")}</span>
+                <span className="text-muted-foreground">Out:</span>
+                <span>{format(new Date(guest.checkOutDate), "dd MMM")}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Bill #:</span>
-                <span>{guest.billNumber}</span>
+                <span className="text-muted-foreground">Bill:</span>
+                <span>{guest.billNumber.substring(guest.billNumber.length - 4)}</span>
               </div>
             </div>
           </div>
         )}
         
         {status !== "Occupied" && (
-          <div className="h-20 flex items-center justify-center">
-            <p className="text-muted-foreground">
+          <div className="h-12 flex items-center justify-center">
+            <p className="text-xs text-muted-foreground">
               {status === "Available" ? "Ready for check-in" : 
                status === "Cleaning" ? "Room being cleaned" : 
                "Under maintenance"}
@@ -90,11 +90,11 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
         )}
       </CardContent>
       
-      <CardFooter className="p-4 pt-0 flex justify-between flex-wrap gap-2">
+      <CardFooter className="p-2 pt-0 flex justify-between gap-1">
         {status === "Available" && (
           <Dialog>
             <DialogTrigger asChild>
-              <Button className="flex-1 gold-gradient text-primary-foreground hover:opacity-90 transition-opacity">
+              <Button className="flex-1 gold-gradient text-primary-foreground hover:opacity-90 transition-opacity text-xs h-7 px-2">
                 Check In
               </Button>
             </DialogTrigger>
@@ -105,7 +105,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
         {status === "Occupied" && (
           <Dialog>
             <DialogTrigger asChild>
-              <Button className="flex-1" variant="outline">
+              <Button className="flex-1 text-xs h-7 px-2" variant="outline">
                 Check Out
               </Button>
             </DialogTrigger>
@@ -116,8 +116,8 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
         {/* Status change dialog */}
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="secondary" className="flex-1">
-              Change Status
+            <Button variant="secondary" className="flex-1 text-xs h-7 px-2">
+              Change
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">

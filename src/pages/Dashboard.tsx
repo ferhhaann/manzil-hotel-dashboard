@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import RoomCard from "@/components/RoomCard";
 import Navbar from "@/components/Navbar";
@@ -155,14 +156,14 @@ const Dashboard = () => {
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
       
-      <main className="flex-grow p-4 md:p-6">
+      <main className="flex-grow p-2 md:p-3">
         <div className="container mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-            <h1 className="text-3xl font-bold">Room Dashboard</h1>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-3 gap-2">
+            <h1 className="text-2xl font-bold">Room Dashboard</h1>
             
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1">
               <button
-                className={`px-3 py-1.5 rounded-full text-sm font-medium transition ${
+                className={`px-2 py-1 rounded-full text-xs font-medium transition ${
                   filter === "all" 
                     ? "bg-primary text-white" 
                     : "bg-secondary/50 hover:bg-secondary"
@@ -172,7 +173,7 @@ const Dashboard = () => {
                 All ({statusCounts.all})
               </button>
               <button
-                className={`px-3 py-1.5 rounded-full text-sm font-medium transition ${
+                className={`px-2 py-1 rounded-full text-xs font-medium transition ${
                   filter === "Available" 
                     ? "bg-green-500 text-white" 
                     : "bg-secondary/50 hover:bg-secondary"
@@ -182,7 +183,7 @@ const Dashboard = () => {
                 Available ({statusCounts.Available})
               </button>
               <button
-                className={`px-3 py-1.5 rounded-full text-sm font-medium transition ${
+                className={`px-2 py-1 rounded-full text-xs font-medium transition ${
                   filter === "Occupied" 
                     ? "bg-amber-500 text-white" 
                     : "bg-secondary/50 hover:bg-secondary"
@@ -192,7 +193,7 @@ const Dashboard = () => {
                 Occupied ({statusCounts.Occupied})
               </button>
               <button
-                className={`px-3 py-1.5 rounded-full text-sm font-medium transition ${
+                className={`px-2 py-1 rounded-full text-xs font-medium transition ${
                   filter === "Maintenance" 
                     ? "bg-gray-500 text-white" 
                     : "bg-secondary/50 hover:bg-secondary"
@@ -202,7 +203,7 @@ const Dashboard = () => {
                 Maintenance ({statusCounts.Maintenance})
               </button>
               <button
-                className={`px-3 py-1.5 rounded-full text-sm font-medium transition ${
+                className={`px-2 py-1 rounded-full text-xs font-medium transition ${
                   filter === "Cleaning" 
                     ? "bg-blue-500 text-white" 
                     : "bg-secondary/50 hover:bg-secondary"
@@ -214,7 +215,7 @@ const Dashboard = () => {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2">
             {filteredRooms.map(room => (
               <RoomCard
                 key={room.roomNumber}
@@ -226,8 +227,8 @@ const Dashboard = () => {
             ))}
             
             {filteredRooms.length === 0 && (
-              <Card className="col-span-full p-8 text-center">
-                <CardContent className="pt-6">
+              <Card className="col-span-full p-4 text-center">
+                <CardContent className="pt-3">
                   <p className="text-lg text-muted-foreground">
                     No rooms match the selected filter.
                   </p>
