@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Room, RoomStatus } from "@/types";
+import { Room, RoomStatus, Guest, PaymentMethod } from "@/types";
 import { format } from "date-fns";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from "@/components/ui/dialog";
 import CheckInForm from "./CheckInForm";
@@ -15,6 +15,17 @@ import {
   DropdownMenuItem, 
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { 
+  Select, 
+  SelectContent, 
+  SelectItem, 
+  SelectTrigger, 
+  SelectValue 
+} from "@/components/ui/select";
+import { calculateBill } from "@/utils/calculateBill";
 
 interface RoomCardProps {
   room: Room;
@@ -47,6 +58,9 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
   const { roomNumber, type, status, guest } = room;
   const [isStatusDialogOpen, setIsStatusDialogOpen] = useState(false);
   const [isViewDetailsOpen, setIsViewDetailsOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editableGuest, setEditableGuest] = useState<Partial<Guest> | null>(null);
+  const [billSummary, setBillSummary] = useState<any>(null);
   
   const handleStatusChange = (newStatus: RoomStatus) => {
     if (status !== newStatus) {
@@ -54,6 +68,96 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
       setIsStatusDialogOpen(false);
     }
   };
+
+  const startEditing = () => {
+    if (guest) {
+      setEditableGuest({...guest});
+      setIsEditing(true);
+      
+      // Calculate initial bill summary
+      if (
+        guest.checkInDate && 
+        guest.checkOutDate && 
+        guest.dailyRent !== undefined && 
+        guest.gstRate !== undefined &&
+        guest.taxIncluded !== undefined &&
+        guest.advancePaid !== undefined
+      ) {
+        setBillSummary(calculateBill(guest));
+      }
+    }
+  };
+
+  const cancelEditing = () => {
+    setIsEditing(false);
+    setEditableGuest(null);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type } = e.target;
+    
+    if (editableGuest) {
+      if (type === 'number') {
+        setEditableGuest((prev) => ({ ...prev, [name]: value === "" ? "" : Number(value) }));
+      } else {
+        setEditableGuest((prev) => ({ ...prev, [name]: value }));
+      }
+    }
+  };
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    if (editableGuest) {
+      setEditableGuest((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleSelectChange = (name: string, value: string) => {
+    if (editableGuest) {
+      setEditableGuest((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleSaveChanges = () => {
+    if (editableGuest && status === "Occupied") {
+      // Convert date strings to Date objects
+      const updatedGuest = {
+        ...editableGuest,
+        checkInDate: new Date(editableGuest.checkInDate as string | Date),
+        checkOutDate: new Date(editableGuest.checkOutDate as string | Date)
+      } as Guest;
+      
+      // Use onCheckIn to update the guest details
+      onCheckIn(roomNumber, updatedGuest);
+      setIsEditing(false);
+      setEditableGuest(null);
+      setIsViewDetailsOpen(false);
+    }
+  };
+
+  // Update bill summary when editable guest changes
+  React.useEffect(() => {
+    if (
+      editableGuest?.checkInDate && 
+      editableGuest?.checkOutDate && 
+      editableGuest?.dailyRent !== undefined && 
+      editableGuest?.gstRate !== undefined &&
+      editableGuest?.taxIncluded !== undefined &&
+      editableGuest?.advancePaid !== undefined
+    ) {
+      const guestWithDates = {
+        ...editableGuest,
+        checkInDate: new Date(editableGuest.checkInDate),
+        checkOutDate: new Date(editableGuest.checkOutDate),
+        dailyRent: Number(editableGuest.dailyRent),
+        gstRate: Number(editableGuest.gstRate),
+        taxIncluded: Boolean(editableGuest.taxIncluded),
+        advancePaid: Number(editableGuest.advancePaid)
+      } as Guest;
+      
+      setBillSummary(calculateBill(guestWithDates));
+    }
+  }, [editableGuest]);
 
   return (
     <Card className={`w-full shadow-sm overflow-hidden flex flex-col h-full border-2 ${getCardClass(status)}`}>
@@ -192,9 +296,9 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
         </div>
       </CardFooter>
 
-      {/* View Room Details Dialog */}
+      {/* View Room Details Dialog - Now with Edit Functionality */}
       <Dialog open={isViewDetailsOpen} onOpenChange={setIsViewDetailsOpen}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-lg">
           <DialogHeader>
             <DialogTitle>Room {roomNumber} Details</DialogTitle>
           </DialogHeader>
@@ -214,9 +318,19 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
               </div>
             </div>
 
-            {status === "Occupied" && guest && (
+            {status === "Occupied" && guest && !isEditing && (
               <div className="border-t pt-4">
-                <h4 className="font-medium mb-3">Guest Information</h4>
+                <div className="flex justify-between items-center mb-3">
+                  <h4 className="font-medium">Guest Information</h4>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    onClick={startEditing}
+                    className="text-xs"
+                  >
+                    Edit Details
+                  </Button>
+                </div>
                 <div className="grid grid-cols-2 gap-2 text-sm">
                   <div className="font-medium">Name:</div>
                   <div>{guest.name}</div>
@@ -244,18 +358,248 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
                 </div>
               </div>
             )}
+
+            {/* Edit Mode Form */}
+            {status === "Occupied" && editableGuest && isEditing && (
+              <div className="border-t pt-4">
+                <h4 className="font-medium mb-4">Edit Guest Information</h4>
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="editName">Guest Name</Label>
+                    <Input
+                      id="editName"
+                      name="name"
+                      value={editableGuest.name}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="editPhone">Phone Number</Label>
+                    <Input
+                      id="editPhone"
+                      name="phone"
+                      value={editableGuest.phone}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="editBillNumber">Bill Number</Label>
+                    <Input
+                      id="editBillNumber"
+                      name="billNumber"
+                      value={editableGuest.billNumber}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="editPaymentMethod">Payment Method</Label>
+                    <Select 
+                      name="paymentMethod" 
+                      onValueChange={(value) => handleSelectChange("paymentMethod", value)}
+                      defaultValue={editableGuest.paymentMethod as string}
+                    >
+                      <SelectTrigger id="editPaymentMethod">
+                        <SelectValue placeholder="Select payment method" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Cash">Cash</SelectItem>
+                        <SelectItem value="Card">Card</SelectItem>
+                        <SelectItem value="UPI">UPI</SelectItem>
+                        <SelectItem value="Bank Transfer">Bank Transfer</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="editAddress">Address</Label>
+                    <Input
+                      id="editAddress"
+                      name="address"
+                      value={editableGuest.address}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </div>
+                  
+                  <div className="col-span-2">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="editCheckInDate">Check-in Date</Label>
+                        <Input
+                          id="editCheckInDate"
+                          name="checkInDate"
+                          type="date"
+                          value={editableGuest.checkInDate instanceof Date 
+                            ? editableGuest.checkInDate.toISOString().split('T')[0] 
+                            : new Date(editableGuest.checkInDate as Date).toISOString().split('T')[0]}
+                          onChange={handleDateChange}
+                          required
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="editCheckOutDate">Check-out Date</Label>
+                        <Input
+                          id="editCheckOutDate"
+                          name="checkOutDate"
+                          type="date"
+                          value={editableGuest.checkOutDate instanceof Date 
+                            ? editableGuest.checkOutDate.toISOString().split('T')[0] 
+                            : new Date(editableGuest.checkOutDate as Date).toISOString().split('T')[0]}
+                          onChange={handleDateChange}
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="editAdults">Number of Adults</Label>
+                    <Input
+                      id="editAdults"
+                      name="numberOfAdults"
+                      type="number"
+                      min="1"
+                      value={editableGuest.numberOfAdults}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="editChildren">Number of Children</Label>
+                    <Input
+                      id="editChildren"
+                      name="numberOfChildren"
+                      type="number"
+                      min="0"
+                      value={editableGuest.numberOfChildren}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="editDailyRent">Daily Rent (₹)</Label>
+                    <Input
+                      id="editDailyRent"
+                      name="dailyRent"
+                      type="number"
+                      min="0"
+                      value={editableGuest.dailyRent}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="editAdvancePaid">Advance Paid (₹)</Label>
+                    <Input
+                      id="editAdvancePaid"
+                      name="advancePaid"
+                      type="number"
+                      min="0"
+                      value={editableGuest.advancePaid}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label>GST Type</Label>
+                    <RadioGroup 
+                      defaultValue={editableGuest.taxIncluded ? "including" : "excluding"}
+                      onValueChange={(value) => handleSelectChange("taxIncluded", value === "including" ? "true" : "false")}
+                      className="flex space-x-4"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="including" id="editIncluding" />
+                        <Label htmlFor="editIncluding">Including</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="excluding" id="editExcluding" />
+                        <Label htmlFor="editExcluding">Excluding</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="editGstRate">GST Rate (%)</Label>
+                    <Input
+                      id="editGstRate"
+                      name="gstRate"
+                      type="number"
+                      min="0"
+                      max="100"
+                      value={editableGuest.gstRate}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </div>
+                
+                {/* Bill Summary */}
+                {billSummary && (
+                  <div className="mt-4 p-4 bg-muted/30 border border-dashed rounded-lg">
+                    <h4 className="font-medium mb-2">Updated Bill Summary</h4>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span>Stay Duration:</span>
+                        <span>{billSummary.duration} day(s)</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Base Amount:</span>
+                        <span>₹ {billSummary.baseAmount.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>CGST ({(editableGuest.gstRate as number) / 2}%):</span>
+                        <span>₹ {billSummary.cgst.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>SGST ({(editableGuest.gstRate as number) / 2}%):</span>
+                        <span>₹ {billSummary.sgst.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between font-medium">
+                        <span>Total Amount:</span>
+                        <span>₹ {billSummary.totalAmount.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Advance Paid:</span>
+                        <span>₹ {billSummary.advancePaid.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between font-bold pt-2 border-t">
+                        <span>Net Payable:</span>
+                        <span>₹ {billSummary.netPayable.toFixed(2)}</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
-          <DialogFooter>
-            <Button
-              onClick={() => setIsViewDetailsOpen(false)}
-            >
-              Close
-            </Button>
+          
+          <DialogFooter className="flex justify-end gap-2">
+            {isEditing ? (
+              <>
+                <Button variant="outline" onClick={cancelEditing}>
+                  Cancel
+                </Button>
+                <Button onClick={handleSaveChanges}>
+                  Save Changes
+                </Button>
+              </>
+            ) : (
+              <Button onClick={() => setIsViewDetailsOpen(false)}>
+                Close
+              </Button>
+            )}
           </DialogFooter>
         </DialogContent>
       </Dialog>
-
-      {/* Status Change Dialog - removed as we're now using dropdown menu */}
     </Card>
   );
 };
