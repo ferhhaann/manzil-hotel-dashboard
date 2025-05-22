@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { getCurrentUser, logout } from "@/utils/auth";
 import { useToast } from "@/hooks/use-toast";
@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 const Navbar = () => {
   const user = getCurrentUser();
   const { toast } = useToast();
+  const location = useLocation();
 
   const handleLogout = () => {
     logout();
@@ -15,6 +16,10 @@ const Navbar = () => {
       title: "Logged out",
       description: "You have been successfully logged out.",
     });
+  };
+
+  const isActiveRoute = (path: string) => {
+    return location.pathname === path;
   };
 
   return (
@@ -31,16 +36,28 @@ const Navbar = () => {
         </div>
 
         <nav className="hidden md:flex items-center gap-6">
-          <Link to="/dashboard" className="text-sm font-medium hover:text-primary transition-colors">
+          <Link 
+            to="/dashboard" 
+            className={`text-sm font-medium transition-colors ${isActiveRoute('/dashboard') ? 'text-primary border-b-2 border-primary' : 'hover:text-primary'}`}
+          >
             Dashboard
           </Link>
-          <Link to="/reservations" className="text-sm font-medium hover:text-primary transition-colors">
+          <Link 
+            to="/reservations" 
+            className={`text-sm font-medium transition-colors ${isActiveRoute('/reservations') ? 'text-primary border-b-2 border-primary' : 'hover:text-primary'}`}
+          >
             Reservations
           </Link>
-          <Link to="/reports" className="text-sm font-medium hover:text-primary transition-colors">
+          <Link 
+            to="/reports" 
+            className={`text-sm font-medium transition-colors ${isActiveRoute('/reports') ? 'text-primary border-b-2 border-primary' : 'hover:text-primary'}`}
+          >
             Reports
           </Link>
-          <Link to="/finance" className="text-sm font-medium hover:text-primary transition-colors">
+          <Link 
+            to="/finance" 
+            className={`text-sm font-medium transition-colors ${isActiveRoute('/finance') ? 'text-primary border-b-2 border-primary' : 'hover:text-primary'}`}
+          >
             Finance
           </Link>
         </nav>
