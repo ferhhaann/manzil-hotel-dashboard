@@ -175,7 +175,7 @@ const Dashboard = () => {
               <button
                 className={`px-3 py-1.5 rounded-full text-sm font-medium transition ${
                   filter === "Available" 
-                    ? "status-available text-white" 
+                    ? "bg-green-500 text-white" 
                     : "bg-secondary/50 hover:bg-secondary"
                 }`}
                 onClick={() => setFilter("Available")}
@@ -185,7 +185,7 @@ const Dashboard = () => {
               <button
                 className={`px-3 py-1.5 rounded-full text-sm font-medium transition ${
                   filter === "Occupied" 
-                    ? "status-occupied text-white" 
+                    ? "bg-amber-500 text-white" 
                     : "bg-secondary/50 hover:bg-secondary"
                 }`}
                 onClick={() => setFilter("Occupied")}
@@ -195,7 +195,7 @@ const Dashboard = () => {
               <button
                 className={`px-3 py-1.5 rounded-full text-sm font-medium transition ${
                   filter === "Maintenance" 
-                    ? "status-maintenance text-white" 
+                    ? "bg-gray-500 text-white" 
                     : "bg-secondary/50 hover:bg-secondary"
                 }`}
                 onClick={() => setFilter("Maintenance")}
@@ -205,7 +205,7 @@ const Dashboard = () => {
               <button
                 className={`px-3 py-1.5 rounded-full text-sm font-medium transition ${
                   filter === "Cleaning" 
-                    ? "status-cleaning text-white" 
+                    ? "bg-blue-500 text-white" 
                     : "bg-secondary/50 hover:bg-secondary"
                 }`}
                 onClick={() => setFilter("Cleaning")}
