@@ -386,7 +386,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
               <div className="border-t pt-4">
                 <h4 className="font-medium mb-4">Edit Guest Information</h4>
                 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-3 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="editName">Guest Name</Label>
                     <Input
