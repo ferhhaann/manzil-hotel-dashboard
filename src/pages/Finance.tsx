@@ -1,15 +1,13 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import { isAuthenticated } from "@/utils/auth";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-import SalesTable from "@/components/SalesTable";
-import ExpenseForm from "@/components/ExpenseForm";
-import ExpenseTable from "@/components/ExpenseTable";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import RevenueSummary from "@/components/RevenueSummary";
+import SalesTabContent from "@/components/finance/SalesTabContent";
+import ExpensesTabContent from "@/components/finance/ExpensesTabContent";
 
 const Finance = () => {
   const navigate = useNavigate();
@@ -56,35 +54,12 @@ const Finance = () => {
               <TabsTrigger value="expenses">Expenses</TabsTrigger>
             </TabsList>
             
-            <TabsContent value="sales" className="space-y-4">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Today's Sales</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <SalesTable />
-                </CardContent>
-              </Card>
+            <TabsContent value="sales">
+              <SalesTabContent />
             </TabsContent>
             
-            <TabsContent value="expenses" className="space-y-4">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Add Expense</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ExpenseForm />
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardHeader>
-                  <CardTitle>Expenses List</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ExpenseTable />
-                </CardContent>
-              </Card>
+            <TabsContent value="expenses">
+              <ExpensesTabContent />
             </TabsContent>
           </Tabs>
         </div>
