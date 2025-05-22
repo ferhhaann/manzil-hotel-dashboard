@@ -111,7 +111,7 @@ const ReservationCalendar: React.FC<ReservationCalendarProps> = ({ reservations 
             </CardTitle>
           </CardHeader>
           
-          <CardContent className="pt-2 h-full">
+          <CardContent className="pt-2 h-full max-w-[95%] mx-auto">
             {reservationsForSelectedDate.length === 0 ? (
               <div className="text-center py-12 text-muted-foreground flex flex-col items-center gap-3">
                 <CalendarIcon className="h-12 w-12 opacity-20" />
