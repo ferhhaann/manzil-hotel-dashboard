@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -71,7 +70,12 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
 
   const startEditing = () => {
     if (guest) {
-      setEditableGuest({...guest});
+      // Create a deep copy of the guest object to avoid direct mutation
+      setEditableGuest({
+        ...guest,
+        checkInDate: new Date(guest.checkInDate),
+        checkOutDate: new Date(guest.checkOutDate)
+      });
       setIsEditing(true);
       
       // Calculate initial bill summary
@@ -114,18 +118,33 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
 
   const handleSelectChange = (name: string, value: string) => {
     if (editableGuest) {
-      setEditableGuest((prev) => ({ ...prev, [name]: value }));
+      setEditableGuest((prev) => {
+        // Special handling for taxIncluded which is a boolean
+        if (name === "taxIncluded") {
+          return { ...prev, [name]: value === "including" };
+        }
+        return { ...prev, [name]: value };
+      });
     }
   };
 
   const handleSaveChanges = () => {
     if (editableGuest && status === "Occupied") {
-      // Convert date strings to Date objects
+      // Make sure we have proper date objects
       const updatedGuest = {
         ...editableGuest,
         checkInDate: new Date(editableGuest.checkInDate as string | Date),
-        checkOutDate: new Date(editableGuest.checkOutDate as string | Date)
+        checkOutDate: new Date(editableGuest.checkOutDate as string | Date),
+        // Make sure all required fields are present and with correct types
+        dailyRent: Number(editableGuest.dailyRent),
+        gstRate: Number(editableGuest.gstRate),
+        taxIncluded: Boolean(editableGuest.taxIncluded),
+        advancePaid: Number(editableGuest.advancePaid),
+        numberOfAdults: Number(editableGuest.numberOfAdults),
+        numberOfChildren: Number(editableGuest.numberOfChildren)
       } as Guest;
+      
+      console.log("Saving updated guest:", updatedGuest);
       
       // Use onCheckIn to update the guest details
       onCheckIn(roomNumber, updatedGuest);
@@ -145,7 +164,8 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
       editableGuest?.taxIncluded !== undefined &&
       editableGuest?.advancePaid !== undefined
     ) {
-      const guestWithDates = {
+      // Create a temporary guest object with the correct types for calculation
+      const tempGuest = {
         ...editableGuest,
         checkInDate: new Date(editableGuest.checkInDate),
         checkOutDate: new Date(editableGuest.checkOutDate),
@@ -155,7 +175,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
         advancePaid: Number(editableGuest.advancePaid)
       } as Guest;
       
-      setBillSummary(calculateBill(guestWithDates));
+      setBillSummary(calculateBill(tempGuest));
     }
   }, [editableGuest]);
 
@@ -514,7 +534,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
                     <Label>GST Type</Label>
                     <RadioGroup 
                       defaultValue={editableGuest.taxIncluded ? "including" : "excluding"}
-                      onValueChange={(value) => handleSelectChange("taxIncluded", value === "including" ? "true" : "false")}
+                      onValueChange={(value) => handleSelectChange("taxIncluded", value)}
                       className="flex space-x-4"
                     >
                       <div className="flex items-center space-x-2">

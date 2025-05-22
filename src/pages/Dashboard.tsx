@@ -119,8 +119,10 @@ const Dashboard = () => {
     });
   };
   
-  // Handle guest check-in
+  // Handle guest check-in or update
   const handleCheckIn = (roomNumber: number, guest: Guest) => {
+    console.log("Handling check-in or update for room", roomNumber, "with guest", guest);
+    
     setRooms(prevRooms => 
       prevRooms.map(room => 
         room.roomNumber === roomNumber 
@@ -129,9 +131,15 @@ const Dashboard = () => {
       )
     );
     
+    // Get the updated room to determine if this is a check-in or update
+    const updatedRoom = rooms.find(room => room.roomNumber === roomNumber);
+    const isUpdate = updatedRoom?.status === "Occupied" && updatedRoom?.guest !== null;
+    
     toast({
-      title: "Check-in Successful",
-      description: `${guest.name} checked into Room ${roomNumber}`,
+      title: isUpdate ? "Guest Info Updated" : "Check-in Successful",
+      description: isUpdate 
+        ? `Guest information updated for Room ${roomNumber}` 
+        : `${guest.name} checked into Room ${roomNumber}`,
     });
   };
   
