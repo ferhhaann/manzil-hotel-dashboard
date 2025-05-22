@@ -27,7 +27,7 @@ const Navbar = () => {
               alt="Manzil Hotel Logo" 
               className="h-10" 
             />
-            {/* <span className="text-2xl font-bold hotel-title">Manzil Hotel</span> */}
+            <span className="text-2xl font-bold hotel-title">Manzil Hotel</span>
           </Link>
         </div>
 
@@ -37,6 +37,9 @@ const Navbar = () => {
           </Link>
           <Link to="/reports" className="text-sm font-medium hover:text-primary transition-colors">
             Reports
+          </Link>
+          <Link to="/finance" className="text-sm font-medium hover:text-primary transition-colors">
+            Finance
           </Link>
         </nav>
 
