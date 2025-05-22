@@ -37,9 +37,9 @@ const Finance = () => {
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
       
-      <main className="flex-grow p-4 md:p-6">
+      <main className="flex-grow p-4 md:p-6 overflow-x-hidden">
         <div className="container mx-auto">
-          <h1 className="text-3xl font-bold mb-6">Financial Management</h1>
+          <h1 className="text-2xl md:text-3xl font-bold mb-6">Financial Management</h1>
           
           <RevenueSummary 
             totalSales={financialSummary.totalSales}
@@ -49,7 +49,7 @@ const Finance = () => {
           />
           
           <Tabs defaultValue="sales" className="w-full mt-6">
-            <TabsList className="grid w-full grid-cols-2 mb-8">
+            <TabsList className="grid w-full grid-cols-2 mb-4 md:mb-8">
               <TabsTrigger value="sales">Sales</TabsTrigger>
               <TabsTrigger value="expenses">Expenses</TabsTrigger>
             </TabsList>

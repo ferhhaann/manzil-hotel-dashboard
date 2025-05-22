@@ -1,14 +1,16 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { getCurrentUser, logout } from "@/utils/auth";
 import { useToast } from "@/hooks/use-toast";
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const user = getCurrentUser();
   const { toast } = useToast();
   const location = useLocation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -20,6 +22,10 @@ const Navbar = () => {
 
   const isActiveRoute = (path: string) => {
     return location.pathname === path;
+  };
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
   };
 
   return (
@@ -35,6 +41,16 @@ const Navbar = () => {
           </Link>
         </div>
 
+        {/* Mobile menu button */}
+        <button 
+          className="md:hidden p-2 text-primary"
+          onClick={toggleMobileMenu}
+          aria-label="Toggle menu"
+        >
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
           <Link 
             to="/dashboard" 
@@ -62,7 +78,57 @@ const Navbar = () => {
           </Link>
         </nav>
 
-        <div className="flex items-center gap-4">
+        {/* Mobile Navigation */}
+        {mobileMenuOpen && (
+          <div className="absolute top-16 left-0 right-0 bg-background border-b shadow-lg md:hidden">
+            <nav className="flex flex-col py-4">
+              <Link 
+                to="/dashboard" 
+                className={`px-4 py-2 text-sm font-medium ${isActiveRoute('/dashboard') ? 'text-primary bg-primary/10' : 'hover:text-primary'}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Dashboard
+              </Link>
+              <Link 
+                to="/reservations" 
+                className={`px-4 py-2 text-sm font-medium ${isActiveRoute('/reservations') ? 'text-primary bg-primary/10' : 'hover:text-primary'}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Reservations
+              </Link>
+              <Link 
+                to="/reports" 
+                className={`px-4 py-2 text-sm font-medium ${isActiveRoute('/reports') ? 'text-primary bg-primary/10' : 'hover:text-primary'}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Reports
+              </Link>
+              <Link 
+                to="/finance" 
+                className={`px-4 py-2 text-sm font-medium ${isActiveRoute('/finance') ? 'text-primary bg-primary/10' : 'hover:text-primary'}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Finance
+              </Link>
+              {user && (
+                <div className="px-4 py-2 border-t mt-2">
+                  <Button 
+                    variant="outline" 
+                    onClick={() => {
+                      handleLogout();
+                      setMobileMenuOpen(false);
+                    }}
+                    className="w-full"
+                  >
+                    Logout
+                  </Button>
+                </div>
+              )}
+            </nav>
+          </div>
+        )}
+
+        <div className="hidden md:flex items-center gap-4">
           {user && (
             <div className="flex items-center gap-4">
               <span className="text-sm hidden md:inline-block">

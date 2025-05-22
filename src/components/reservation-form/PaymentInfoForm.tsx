@@ -28,7 +28,7 @@ const PaymentInfoForm: React.FC<PaymentInfoFormProps> = ({ totalAmount }) => {
   return (
     <div className="space-y-4">
       <h3 className="font-semibold">Payment Information</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <FormField
           control={form.control}
           name="advanceAmount"
@@ -67,7 +67,7 @@ const PaymentInfoForm: React.FC<PaymentInfoFormProps> = ({ totalAmount }) => {
                     <SelectValue placeholder="Select method" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
+                <SelectContent className="min-w-[200px]">
                   <SelectItem value="Cash">Cash</SelectItem>
                   <SelectItem value="Card">Card</SelectItem>
                   <SelectItem value="UPI">UPI</SelectItem>
