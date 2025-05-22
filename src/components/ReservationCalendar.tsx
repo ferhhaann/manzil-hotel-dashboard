@@ -43,13 +43,13 @@ const ReservationCalendar: React.FC<ReservationCalendarProps> = ({ reservations 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       <div className="md:col-span-1">
-        <Card>
-          <CardContent className="p-0">
+        <Card className="overflow-hidden">
+          <CardContent className="p-1 md:p-0">
             <Calendar
               mode="single"
               selected={selectedDate}
               onSelect={setSelectedDate}
-              className="rounded-md border"
+              className="rounded-md border w-full pointer-events-auto"
               modifiersStyles={{
                 today: {
                   fontWeight: "bold",
@@ -68,7 +68,7 @@ const ReservationCalendar: React.FC<ReservationCalendarProps> = ({ reservations 
                 checkOut: "border-r-4 border-amber-500"
               }}
               footer={
-                <div className="text-center text-xs space-y-1 mt-2 text-muted-foreground">
+                <div className="text-center text-xs space-y-1 mt-2 text-muted-foreground p-2">
                   <div className="flex items-center justify-center gap-2">
                     <div className="w-3 h-3 bg-accent/30 rounded-sm"></div>
                     <span>Booked</span>
@@ -89,13 +89,13 @@ const ReservationCalendar: React.FC<ReservationCalendarProps> = ({ reservations 
       </div>
 
       <div className="md:col-span-2">
-        <Card>
-          <CardContent className="pt-4">
-            <h3 className="font-semibold text-lg mb-3 flex items-center justify-between">
-              <span>
+        <Card className="h-full">
+          <CardContent className="pt-4 h-full">
+            <h3 className="font-semibold text-lg mb-3 flex items-center justify-between flex-wrap gap-2">
+              <span className="text-sm md:text-lg">
                 Reservations for {selectedDate ? format(selectedDate, "dd MMMM yyyy") : "Today"}
               </span>
-              <Badge variant="outline">
+              <Badge variant="outline" className="whitespace-nowrap">
                 {reservationsForSelectedDate.length} reservation(s)
               </Badge>
             </h3>
@@ -105,14 +105,14 @@ const ReservationCalendar: React.FC<ReservationCalendarProps> = ({ reservations 
                 No reservations for this date
               </div>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-3 max-h-[calc(100vh-280px)] overflow-y-auto pr-1">
                 {reservationsForSelectedDate.map((reservation) => (
                   <Card
                     key={reservation.id}
                     className="cursor-pointer hover:shadow-md transition-shadow"
                     onClick={() => setSelectedReservation(reservation)}
                   >
-                    <CardContent className="p-3 flex justify-between">
+                    <CardContent className="p-3 flex flex-col sm:flex-row justify-between gap-2">
                       <div>
                         <h4 className="font-medium">{reservation.guestName}</h4>
                         <div className="text-xs text-muted-foreground">
@@ -123,7 +123,7 @@ const ReservationCalendar: React.FC<ReservationCalendarProps> = ({ reservations 
                           {format(new Date(reservation.checkOutDate), "dd MMM")}
                         </div>
                       </div>
-                      <div className="text-right">
+                      <div className="text-left sm:text-right mt-2 sm:mt-0">
                         <Badge
                           className={
                             reservation.status === "Confirmed"
