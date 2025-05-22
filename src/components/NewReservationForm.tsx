@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {
   DialogContent,
@@ -35,7 +34,7 @@ import { format, addDays } from "date-fns";
 import { Reservation, PaymentMethod } from "@/types";
 import { useForm } from "react-hook-form";
 import { CalendarIcon } from "lucide-react";
-import { v4 as uuidv4 } from '@tanstack/react-query';
+import { v4 as uuidv4 } from 'uuid';
 
 interface NewReservationFormProps {
   onSubmit: (reservation: Reservation) => void;
