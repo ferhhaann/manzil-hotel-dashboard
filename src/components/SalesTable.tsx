@@ -120,12 +120,12 @@ const SalesTable = () => {
       : true;
     
     // Filter by month if selected
-    const matchesMonth = selectedMonth 
+    const matchesMonth = selectedMonth && selectedMonth !== "all"
       ? sale.date.getMonth() === parseInt(selectedMonth)
       : true;
     
     // Filter by year if selected
-    const matchesYear = selectedYear 
+    const matchesYear = selectedYear && selectedYear !== "all"
       ? sale.date.getFullYear() === parseInt(selectedYear)
       : true;
     
@@ -189,7 +189,8 @@ const SalesTable = () => {
               <SelectValue placeholder="Month" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Months</SelectItem>
+              {/* Fixed: Replaced empty string with "all" as value */}
+              <SelectItem value="all">All Months</SelectItem>
               {months.map((month) => (
                 <SelectItem key={month.value} value={month.value}>
                   {month.label}
@@ -204,7 +205,8 @@ const SalesTable = () => {
               <SelectValue placeholder="Year" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Years</SelectItem>
+              {/* Fixed: Replaced empty string with "all" as value */}
+              <SelectItem value="all">All Years</SelectItem>
               {years.map((year) => (
                 <SelectItem key={year} value={year}>
                   {year}
@@ -219,6 +221,7 @@ const SalesTable = () => {
         </div>
       </div>
       
+      {/* Summary Display */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm font-medium">
         <div className="bg-green-50 p-3 rounded-md text-center">
           Total Sales: ₹ {totalSales.toLocaleString()}
@@ -231,6 +234,7 @@ const SalesTable = () => {
         </div>
       </div>
       
+      {/* Table */}
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -280,6 +284,7 @@ const SalesTable = () => {
         </Table>
       </div>
       
+      {/* Buttons */}
       <div className="flex justify-end">
         <Button variant="outline" className="mr-2">
           Export as CSV

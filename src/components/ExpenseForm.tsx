@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -121,6 +120,7 @@ const ExpenseForm = () => {
                         date > new Date() || date < new Date("2022-01-01")
                       }
                       initialFocus
+                      className="pointer-events-auto p-3"
                     />
                   </PopoverContent>
                 </Popover>
