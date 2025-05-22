@@ -36,7 +36,6 @@ const initialSalesData = [
     customerName: "Self",
     roomNumber: 102,
     amount: 3000,
-    expense: 500,
     paymentMethod: "Cash",
     status: "Paid",
   },
@@ -48,7 +47,6 @@ const initialSalesData = [
     customerName: "ABC Company",
     roomNumber: 201,
     amount: 2000,
-    expense: 300,
     paymentMethod: "Card",
     status: "Paid",
   },
@@ -60,7 +58,6 @@ const initialSalesData = [
     customerName: "XYZ Corporation",
     roomNumber: 105,
     amount: 3500,
-    expense: 700,
     paymentMethod: "UPI",
     status: "Pending",
   },
@@ -72,7 +69,6 @@ const initialSalesData = [
     customerName: "Self",
     roomNumber: 302,
     amount: 4000,
-    expense: 800,
     paymentMethod: "Card",
     status: "Paid",
   },
@@ -134,8 +130,6 @@ const SalesTable = () => {
   
   // Calculate totals for the filtered data
   const totalSales = filteredData.reduce((total, sale) => total + sale.amount, 0);
-  const totalExpenses = filteredData.reduce((total, sale) => total + sale.expense, 0);
-  const netRevenue = totalSales - totalExpenses;
   
   // Clear all filters
   const clearFilters = () => {
@@ -189,7 +183,6 @@ const SalesTable = () => {
               <SelectValue placeholder="Month" />
             </SelectTrigger>
             <SelectContent>
-              {/* Fixed: Replaced empty string with "all" as value */}
               <SelectItem value="all">All Months</SelectItem>
               {months.map((month) => (
                 <SelectItem key={month.value} value={month.value}>
@@ -205,7 +198,6 @@ const SalesTable = () => {
               <SelectValue placeholder="Year" />
             </SelectTrigger>
             <SelectContent>
-              {/* Fixed: Replaced empty string with "all" as value */}
               <SelectItem value="all">All Years</SelectItem>
               {years.map((year) => (
                 <SelectItem key={year} value={year}>
@@ -222,15 +214,9 @@ const SalesTable = () => {
       </div>
       
       {/* Summary Display */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm font-medium">
+      <div className="grid grid-cols-1 gap-2 text-sm font-medium">
         <div className="bg-green-50 p-3 rounded-md text-center">
           Total Sales: ₹ {totalSales.toLocaleString()}
-        </div>
-        <div className="bg-red-50 p-3 rounded-md text-center">
-          Total Expenses: ₹ {totalExpenses.toLocaleString()}
-        </div>
-        <div className="bg-blue-50 p-3 rounded-md text-center">
-          Net Revenue: ₹ {netRevenue.toLocaleString()}
         </div>
       </div>
       
@@ -245,8 +231,6 @@ const SalesTable = () => {
               <TableHead>Customer</TableHead>
               <TableHead>Room</TableHead>
               <TableHead>Amount</TableHead>
-              <TableHead>Expense</TableHead>
-              <TableHead>Net</TableHead>
               <TableHead>Payment Method</TableHead>
               <TableHead>Status</TableHead>
             </TableRow>
@@ -261,8 +245,6 @@ const SalesTable = () => {
                   <TableCell>{sale.customerName}</TableCell>
                   <TableCell>{sale.roomNumber}</TableCell>
                   <TableCell>₹ {sale.amount.toLocaleString()}</TableCell>
-                  <TableCell className="text-red-600">₹ {sale.expense.toLocaleString()}</TableCell>
-                  <TableCell>₹ {(sale.amount - sale.expense).toLocaleString()}</TableCell>
                   <TableCell>{sale.paymentMethod}</TableCell>
                   <TableCell>
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${
@@ -275,7 +257,7 @@ const SalesTable = () => {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={10} className="h-24 text-center">
+                <TableCell colSpan={8} className="h-24 text-center">
                   No sales found matching the selected criteria.
                 </TableCell>
               </TableRow>
