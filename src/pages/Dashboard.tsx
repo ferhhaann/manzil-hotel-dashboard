@@ -6,6 +6,7 @@ import { Room, RoomStatus, Guest } from "@/types";
 import { getCurrentUser, isAuthenticated } from "@/utils/auth";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { Card, CardContent } from "@/components/ui/card";
 
 // Initial rooms data
 const initialRooms: Room[] = [
@@ -111,6 +112,11 @@ const Dashboard = () => {
           : room
       )
     );
+    
+    toast({
+      title: "Check-in Successful",
+      description: `${guest.name} checked into Room ${roomNumber}`,
+    });
   };
   
   // Handle guest check-out
@@ -122,6 +128,11 @@ const Dashboard = () => {
           : room
       )
     );
+    
+    toast({
+      title: "Check-out Complete",
+      description: `Room ${roomNumber} has been checked out and marked for cleaning`,
+    });
   };
   
   // Filter rooms based on selection
@@ -164,7 +175,7 @@ const Dashboard = () => {
               <button
                 className={`px-3 py-1.5 rounded-full text-sm font-medium transition ${
                   filter === "Available" 
-                    ? "status-available" 
+                    ? "status-available text-white" 
                     : "bg-secondary/50 hover:bg-secondary"
                 }`}
                 onClick={() => setFilter("Available")}
@@ -174,7 +185,7 @@ const Dashboard = () => {
               <button
                 className={`px-3 py-1.5 rounded-full text-sm font-medium transition ${
                   filter === "Occupied" 
-                    ? "status-occupied" 
+                    ? "status-occupied text-white" 
                     : "bg-secondary/50 hover:bg-secondary"
                 }`}
                 onClick={() => setFilter("Occupied")}
@@ -184,7 +195,7 @@ const Dashboard = () => {
               <button
                 className={`px-3 py-1.5 rounded-full text-sm font-medium transition ${
                   filter === "Maintenance" 
-                    ? "status-maintenance" 
+                    ? "status-maintenance text-white" 
                     : "bg-secondary/50 hover:bg-secondary"
                 }`}
                 onClick={() => setFilter("Maintenance")}
@@ -194,7 +205,7 @@ const Dashboard = () => {
               <button
                 className={`px-3 py-1.5 rounded-full text-sm font-medium transition ${
                   filter === "Cleaning" 
-                    ? "status-cleaning" 
+                    ? "status-cleaning text-white" 
                     : "bg-secondary/50 hover:bg-secondary"
                 }`}
                 onClick={() => setFilter("Cleaning")}
@@ -204,7 +215,7 @@ const Dashboard = () => {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredRooms.map(room => (
               <RoomCard
                 key={room.roomNumber}
@@ -214,6 +225,16 @@ const Dashboard = () => {
                 onCheckOut={handleCheckOut}
               />
             ))}
+            
+            {filteredRooms.length === 0 && (
+              <Card className="col-span-full p-8 text-center">
+                <CardContent className="pt-6">
+                  <p className="text-lg text-muted-foreground">
+                    No rooms match the selected filter.
+                  </p>
+                </CardContent>
+              </Card>
+            )}
           </div>
         </div>
       </main>

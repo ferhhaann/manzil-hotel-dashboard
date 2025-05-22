@@ -35,7 +35,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
   };
 
   return (
-    <Card className="w-full h-full shadow-md overflow-hidden flex flex-col">
+    <Card className="w-full shadow-md overflow-hidden flex flex-col h-full">
       <CardHeader className="p-4 pb-0">
         <div className="flex items-center justify-between">
           <CardTitle className="text-xl">Room {roomNumber}</CardTitle>
@@ -84,7 +84,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
         {status === "Available" && (
           <Dialog>
             <DialogTrigger asChild>
-              <Button className="flex-1 gold-gradient text-primary hover:opacity-90 transition-opacity">
+              <Button className="flex-1 gold-gradient text-primary-foreground hover:opacity-90 transition-opacity">
                 Check In
               </Button>
             </DialogTrigger>
@@ -103,7 +103,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
           </Dialog>
         )}
         
-        {/* Status update buttons */}
+        {/* Status change dialog */}
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="secondary" className="flex-1">
@@ -117,33 +117,37 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
                 <Button
                   onClick={() => handleStatusChange("Available")}
                   disabled={status === "Available"}
-                  className="status-available"
+                  variant="outline"
+                  className="status-available text-white"
                 >
                   Available
                 </Button>
                 <Button
                   onClick={() => handleStatusChange("Occupied")}
                   disabled={status === "Occupied"}
-                  className="status-occupied"
+                  variant="outline"
+                  className="status-occupied text-white"
                 >
                   Occupied
                 </Button>
                 <Button
                   onClick={() => handleStatusChange("Maintenance")}
                   disabled={status === "Maintenance"}
-                  className="status-maintenance"
+                  variant="outline"
+                  className="status-maintenance text-white"
                 >
                   Maintenance
                 </Button>
                 <Button
                   onClick={() => handleStatusChange("Cleaning")}
                   disabled={status === "Cleaning"}
-                  className="status-cleaning"
+                  variant="outline"
+                  className="status-cleaning text-white"
                 >
                   Cleaning
                 </Button>
               </div>
-              <Button variant="outline" className="w-full mt-4" onClick={() => document.body.click()}>
+              <Button className="w-full mt-4" onClick={() => document.body.click()}>
                 Cancel
               </Button>
             </div>
