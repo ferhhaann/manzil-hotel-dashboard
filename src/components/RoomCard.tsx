@@ -1,9 +1,10 @@
+
 import React, { useState } from "react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Room, RoomStatus, Guest, PaymentMethod } from "@/types";
 import { format } from "date-fns";
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from "@/components/ui/dialog";
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose, DialogDescription } from "@/components/ui/dialog";
 import CheckInForm from "./CheckInForm";
 import CheckOutForm from "./CheckOutForm";
 import { MoreHorizontal, Settings, Eye } from "lucide-react";
@@ -321,7 +322,9 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
             <DialogTitle>Room {roomNumber} Details</DialogTitle>
+            <DialogDescription>View and edit room information</DialogDescription>
           </DialogHeader>
+          
           <div className="space-y-4 py-4">
             <div className="grid grid-cols-2 gap-2">
               <div className="text-sm font-medium">Room Number:</div>
