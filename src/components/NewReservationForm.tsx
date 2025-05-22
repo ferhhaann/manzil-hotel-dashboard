@@ -5,13 +5,13 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { addDays } from "date-fns";
 import { Reservation, PaymentMethod } from "@/types";
 import { useForm } from "react-hook-form";
-import { v4 as uuidv4 } from 'uuid';
 import GuestInfoForm from "./reservation-form/GuestInfoForm";
 import StayDetailsForm from "./reservation-form/StayDetailsForm";
 import RoomSelectionForm from "./reservation-form/RoomSelectionForm";
@@ -41,51 +41,56 @@ const NewReservationForm: React.FC<NewReservationFormProps> = ({ onSubmit }) => 
   });
   
   const [selectedRooms, setSelectedRooms] = useState<number[]>([]);
+  const [roomRates, setRoomRates] = useState<{[key: number]: number}>({});
   const [totalAmount, setTotalAmount] = useState(0);
   
-  // Handle room selection
+  // Handle room selection with custom rates
   const handleRoomToggle = (roomNumber: number, rate: number) => {
     setSelectedRooms(prev => {
       if (prev.includes(roomNumber)) {
-        return prev.filter(r => r !== roomNumber);
+        // Remove room
+        const newSelectedRooms = prev.filter(r => r !== roomNumber);
+        // Also remove the rate
+        const newRates = {...roomRates};
+        delete newRates[roomNumber];
+        setRoomRates(newRates);
+        return newSelectedRooms;
       } else {
+        // Add room with custom rate
+        setRoomRates(prev => ({
+          ...prev,
+          [roomNumber]: rate
+        }));
         return [...prev, roomNumber];
       }
     });
     
+    // Recalculate total amount
+    recalculateTotal();
+  };
+  
+  // Recalculate total based on selected rooms and their rates
+  const recalculateTotal = () => {
     const checkInDate = form.getValues("checkInDate");
     const checkOutDate = form.getValues("checkOutDate");
     
     // Calculate nights
     const nights = Math.round((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24));
     
-    // Recalculate total
-    const newTotal = availableRooms
-      .filter(room => {
-        if (room.number === roomNumber) {
-          return !selectedRooms.includes(roomNumber);
-        }
-        return selectedRooms.includes(room.number);
-      })
-      .reduce((sum, room) => sum + room.rate, 0) * nights;
+    // Calculate total using room rates (custom or default)
+    let newTotal = 0;
+    selectedRooms.forEach(roomNumber => {
+      const rate = roomRates[roomNumber] || 
+        availableRooms.find(r => r.number === roomNumber)?.rate || 0;
+      newTotal += rate;
+    });
     
-    setTotalAmount(newTotal);
+    setTotalAmount(newTotal * nights);
   };
   
   // Update total when dates change
   const handleDateChange = () => {
-    const checkInDate = form.getValues("checkInDate");
-    const checkOutDate = form.getValues("checkOutDate");
-    
-    // Calculate nights
-    const nights = Math.round((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24));
-    
-    // Calculate total
-    const newTotal = availableRooms
-      .filter(room => selectedRooms.includes(room.number))
-      .reduce((sum, room) => sum + room.rate, 0) * nights;
-    
-    setTotalAmount(newTotal);
+    recalculateTotal();
   };
   
   // Handle form submission
@@ -125,13 +130,14 @@ const NewReservationForm: React.FC<NewReservationFormProps> = ({ onSubmit }) => 
   });
   
   return (
-    <DialogContent className="sm:max-w-lg">
+    <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
       <DialogHeader>
         <DialogTitle>New Reservation</DialogTitle>
+        <DialogDescription>Create a new hotel reservation</DialogDescription>
       </DialogHeader>
       
       <Form {...form}>
-        <form onSubmit={handleFormSubmit} className="space-y-4">
+        <form onSubmit={handleFormSubmit} className="space-y-3">
           <GuestInfoForm />
           <StayDetailsForm handleDateChange={handleDateChange} />
           <RoomSelectionForm 
