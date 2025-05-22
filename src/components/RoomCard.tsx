@@ -4,7 +4,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Button } from "@/components/ui/button";
 import { Room, RoomStatus } from "@/types";
 import { format } from "date-fns";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import CheckInForm from "./CheckInForm";
 import CheckOutForm from "./CheckOutForm";
 
@@ -113,55 +113,57 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
           </Dialog>
         )}
         
-        {/* Status change dialog */}
+        {/* Status change dialog with proper Dialog.Content */}
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="secondary" className="flex-1">
               Change Status
             </Button>
           </DialogTrigger>
-          <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-              <h3 className="text-lg font-semibold mb-4">Update Room Status</h3>
-              <div className="grid grid-cols-2 gap-2">
-                <Button
-                  onClick={() => handleStatusChange("Available")}
-                  disabled={status === "Available"}
-                  variant="outline"
-                  className="bg-green-500 text-white hover:bg-green-600"
-                >
-                  Available
-                </Button>
-                <Button
-                  onClick={() => handleStatusChange("Occupied")}
-                  disabled={status === "Occupied"}
-                  variant="outline"
-                  className="bg-amber-500 text-white hover:bg-amber-600"
-                >
-                  Occupied
-                </Button>
-                <Button
-                  onClick={() => handleStatusChange("Maintenance")}
-                  disabled={status === "Maintenance"}
-                  variant="outline"
-                  className="bg-gray-500 text-white hover:bg-gray-600"
-                >
-                  Maintenance
-                </Button>
-                <Button
-                  onClick={() => handleStatusChange("Cleaning")}
-                  disabled={status === "Cleaning"}
-                  variant="outline"
-                  className="bg-blue-500 text-white hover:bg-blue-600"
-                >
-                  Cleaning
-                </Button>
-              </div>
-              <Button className="w-full mt-4" onClick={() => document.body.click()}>
-                Cancel
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>Update Room Status</DialogTitle>
+            </DialogHeader>
+            <div className="grid grid-cols-2 gap-2 py-4">
+              <Button
+                onClick={() => handleStatusChange("Available")}
+                disabled={status === "Available"}
+                variant="outline"
+                className="bg-green-500 text-white hover:bg-green-600"
+              >
+                Available
+              </Button>
+              <Button
+                onClick={() => handleStatusChange("Occupied")}
+                disabled={status === "Occupied"}
+                variant="outline"
+                className="bg-amber-500 text-white hover:bg-amber-600"
+              >
+                Occupied
+              </Button>
+              <Button
+                onClick={() => handleStatusChange("Maintenance")}
+                disabled={status === "Maintenance"}
+                variant="outline"
+                className="bg-gray-500 text-white hover:bg-gray-600"
+              >
+                Maintenance
+              </Button>
+              <Button
+                onClick={() => handleStatusChange("Cleaning")}
+                disabled={status === "Cleaning"}
+                variant="outline"
+                className="bg-blue-500 text-white hover:bg-blue-600"
+              >
+                Cleaning
               </Button>
             </div>
-          </div>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button type="button" variant="secondary">Cancel</Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
         </Dialog>
       </CardFooter>
     </Card>

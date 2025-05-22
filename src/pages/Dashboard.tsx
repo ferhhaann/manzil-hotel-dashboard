@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import RoomCard from "@/components/RoomCard";
 import Navbar from "@/components/Navbar";
