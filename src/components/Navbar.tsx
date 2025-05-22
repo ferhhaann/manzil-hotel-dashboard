@@ -27,7 +27,6 @@ const Navbar = () => {
               alt="Manzil Hotel Logo" 
               className="h-10" 
             />
-            <span className="text-2xl font-bold hotel-title">Manzil Hotel</span>
           </Link>
         </div>
 

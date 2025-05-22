@@ -55,7 +55,11 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-primary/5 to-primary/10 p-4">
       <div className="flex flex-col items-center mb-8">
-        <h1 className="text-5xl md:text-6xl font-bold hotel-title mb-4">Manzil Hotel</h1>
+        <img 
+              src="/lovable-uploads/aabbf551-1fea-4b30-9bdc-62fe62e54f5d.png" 
+              alt="Manzil Hotel Logo" 
+              className="h-10" 
+            />
         <p className="text-muted-foreground text-lg">Management System</p>
       </div>
 
