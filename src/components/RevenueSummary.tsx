@@ -1,16 +1,17 @@
 
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowDown, ArrowUp, Landmark } from "lucide-react";
+import { ArrowDown, ArrowUp, Landmark, Calendar } from "lucide-react";
 
 interface RevenueSummaryProps {
   totalSales: number;
   totalExpenses: number;
   revenue: number;
   month: string;
+  period?: string;
 }
 
-const RevenueSummary = ({ totalSales, totalExpenses, revenue, month }: RevenueSummaryProps) => {
+const RevenueSummary = ({ totalSales, totalExpenses, revenue, month, period }: RevenueSummaryProps) => {
   return (
     <div className="grid gap-4 md:grid-cols-3">
       <Card className="bg-green-50">
@@ -24,7 +25,10 @@ const RevenueSummary = ({ totalSales, totalExpenses, revenue, month }: RevenueSu
               <ArrowUp className="h-4 w-4 text-green-600" />
             </div>
           </div>
-          <p className="text-xs text-muted-foreground mt-2">{month}</p>
+          <div className="flex items-center gap-1 text-xs text-muted-foreground mt-2">
+            <Calendar className="h-3 w-3" />
+            <span>{period || month}</span>
+          </div>
         </CardContent>
       </Card>
       
@@ -39,7 +43,10 @@ const RevenueSummary = ({ totalSales, totalExpenses, revenue, month }: RevenueSu
               <ArrowDown className="h-4 w-4 text-red-600" />
             </div>
           </div>
-          <p className="text-xs text-muted-foreground mt-2">{month}</p>
+          <div className="flex items-center gap-1 text-xs text-muted-foreground mt-2">
+            <Calendar className="h-3 w-3" />
+            <span>{period || month}</span>
+          </div>
         </CardContent>
       </Card>
       
@@ -54,7 +61,10 @@ const RevenueSummary = ({ totalSales, totalExpenses, revenue, month }: RevenueSu
               <Landmark className="h-4 w-4 text-blue-600" />
             </div>
           </div>
-          <p className="text-xs text-muted-foreground mt-2">{month}</p>
+          <div className="flex items-center gap-1 text-xs text-muted-foreground mt-2">
+            <Calendar className="h-3 w-3" />
+            <span>{period || month}</span>
+          </div>
         </CardContent>
       </Card>
     </div>
