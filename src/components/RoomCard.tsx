@@ -117,7 +117,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="secondary" className="flex-1 text-xs h-7 px-2">
-              Change
+              Change Status
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
