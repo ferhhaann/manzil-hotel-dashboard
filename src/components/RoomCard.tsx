@@ -113,7 +113,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
           </Dialog>
         )}
         
-        {/* Status change dialog with proper Dialog.Content */}
+        {/* Status change dialog */}
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="secondary" className="flex-1">
@@ -159,9 +159,11 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
               </Button>
             </div>
             <DialogFooter>
-              <DialogClose asChild>
-                <Button type="button" variant="secondary">Cancel</Button>
-              </DialogClose>
+              <Button type="button" variant="secondary" onClick={() => {
+                // Using a close callback instead of DialogClose component
+                const closeEvent = new CustomEvent('close-dialog');
+                document.dispatchEvent(closeEvent);
+              }}>Cancel</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
