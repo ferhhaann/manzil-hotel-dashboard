@@ -170,7 +170,7 @@ const EditReservationForm: React.FC<EditReservationFormProps> = ({
   });
   
   return (
-    <DialogContent className="sm:max-w-lg">
+    <DialogContent className="sm:max-w-4xl">
       <DialogHeader>
         <DialogTitle>Edit Reservation #{reservation.id}</DialogTitle>
       </DialogHeader>
@@ -179,7 +179,7 @@ const EditReservationForm: React.FC<EditReservationFormProps> = ({
         <form onSubmit={handleFormSubmit} className="space-y-4">
           <div className="space-y-4">
             <h3 className="font-semibold">Guest Information</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <FormField
                 control={form.control}
                 name="guestName"
@@ -256,7 +256,7 @@ const EditReservationForm: React.FC<EditReservationFormProps> = ({
           
           <div className="space-y-4">
             <h3 className="font-semibold">Stay Details</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <FormField
                 control={form.control}
                 name="checkInDate"
@@ -340,44 +340,46 @@ const EditReservationForm: React.FC<EditReservationFormProps> = ({
                 )}
               />
               
-              <FormField
-                control={form.control}
-                name="adults"
-                rules={{ required: "Number of adults is required" }}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Adults</FormLabel>
-                    <FormControl>
-                      <Input 
-                        type="number" 
-                        min={1} 
-                        {...field} 
-                        onChange={(e) => field.onChange(parseInt(e.target.value))}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <FormField
-                control={form.control}
-                name="children"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Children</FormLabel>
-                    <FormControl>
-                      <Input 
-                        type="number" 
-                        min={0} 
-                        {...field}
-                        onChange={(e) => field.onChange(parseInt(e.target.value))}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <div className="grid grid-cols-2 gap-2">
+                <FormField
+                  control={form.control}
+                  name="adults"
+                  rules={{ required: "Number of adults is required" }}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Adults</FormLabel>
+                      <FormControl>
+                        <Input 
+                          type="number" 
+                          min={1} 
+                          {...field} 
+                          onChange={(e) => field.onChange(parseInt(e.target.value))}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="children"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Children</FormLabel>
+                      <FormControl>
+                        <Input 
+                          type="number" 
+                          min={0} 
+                          {...field}
+                          onChange={(e) => field.onChange(parseInt(e.target.value))}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
             </div>
             
             <FormField
@@ -453,7 +455,7 @@ const EditReservationForm: React.FC<EditReservationFormProps> = ({
           
           <div className="space-y-4">
             <h3 className="font-semibold">Payment Information</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <FormField
                 control={form.control}
                 name="advanceAmount"
