@@ -34,6 +34,9 @@ const Navbar = () => {
           <Link to="/dashboard" className="text-sm font-medium hover:text-primary transition-colors">
             Dashboard
           </Link>
+          <Link to="/reservations" className="text-sm font-medium hover:text-primary transition-colors">
+            Reservations
+          </Link>
           <Link to="/reports" className="text-sm font-medium hover:text-primary transition-colors">
             Reports
           </Link>
