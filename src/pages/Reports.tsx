@@ -7,27 +7,42 @@ import { isAuthenticated } from "@/utils/auth";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
-// We'll use the same initial room data as in Dashboard
-// In a real app, this would come from a backend service
+// Initial rooms data matching Dashboard.tsx
 const initialRooms: Room[] = [
-  // Premium Rooms (1-10)
-  ...Array.from({ length: 10 }, (_, i) => ({
+  // Ground floor - Deluxe Rooms (101-104)
+  ...Array.from({ length: 4 }, (_, i) => ({
     roomNumber: 101 + i,
+    type: "Deluxe" as const,
+    status: "Available" as const,
+    guest: null
+  })),
+  
+  // First floor - Deluxe Rooms (201-205)
+  ...Array.from({ length: 5 }, (_, i) => ({
+    roomNumber: 201 + i,
+    type: "Deluxe" as const,
+    status: "Available" as const,
+    guest: null
+  })),
+  
+  // Second floor - Premium Rooms (301-304)
+  ...Array.from({ length: 4 }, (_, i) => ({
+    roomNumber: 301 + i,
     type: "Premium" as const,
     status: "Available" as const,
     guest: null
   })),
   
-  // Deluxe Rooms (11-14)
-  ...Array.from({ length: 4 }, (_, i) => ({
-    roomNumber: 201 + i,
+  // Second floor - Deluxe Room (305)
+  {
+    roomNumber: 305,
     type: "Deluxe" as const,
     status: "Available" as const,
     guest: null
-  }))
+  }
 ];
 
-// Add some demo data for reports
+// Add demo data for reports
 initialRooms[1].status = "Occupied";
 initialRooms[1].guest = {
   billNumber: "MH230501001",

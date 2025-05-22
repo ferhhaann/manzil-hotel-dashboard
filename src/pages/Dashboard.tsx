@@ -10,21 +10,37 @@ import { Card, CardContent } from "@/components/ui/card";
 
 // Initial rooms data
 const initialRooms: Room[] = [
-  // Premium Rooms (1-10)
-  ...Array.from({ length: 10 }, (_, i) => ({
+  // Ground floor - Deluxe Rooms (101-104)
+  ...Array.from({ length: 4 }, (_, i) => ({
     roomNumber: 101 + i,
+    type: "Deluxe" as const,
+    status: "Available" as RoomStatus,
+    guest: null
+  })),
+  
+  // First floor - Deluxe Rooms (201-205)
+  ...Array.from({ length: 5 }, (_, i) => ({
+    roomNumber: 201 + i,
+    type: "Deluxe" as const,
+    status: "Available" as RoomStatus,
+    guest: null
+  })),
+  
+  // Second floor - Premium Rooms (301-304)
+  ...Array.from({ length: 4 }, (_, i) => ({
+    roomNumber: 301 + i,
     type: "Premium" as const,
     status: "Available" as RoomStatus,
     guest: null
   })),
   
-  // Deluxe Rooms (11-14)
-  ...Array.from({ length: 4 }, (_, i) => ({
-    roomNumber: 201 + i,
+  // Second floor - Deluxe Room (305)
+  {
+    roomNumber: 305,
     type: "Deluxe" as const,
     status: "Available" as RoomStatus,
     guest: null
-  }))
+  }
 ];
 
 // Set some rooms to different statuses for demo purposes
