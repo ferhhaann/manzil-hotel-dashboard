@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {
   DialogContent,
@@ -130,7 +129,7 @@ const NewReservationForm: React.FC<NewReservationFormProps> = ({ onSubmit }) => 
   });
   
   return (
-    <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
+    <DialogContent className="sm:max-w-xl md:max-w-2xl max-h-[90vh] overflow-y-auto">
       <DialogHeader>
         <DialogTitle>New Reservation</DialogTitle>
         <DialogDescription>Create a new hotel reservation</DialogDescription>

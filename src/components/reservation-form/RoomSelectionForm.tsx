@@ -57,8 +57,8 @@ const RoomSelectionForm: React.FC<RoomSelectionFormProps> = ({
         name="roomNumbers"
         render={() => (
           <FormItem>
-            <div className="max-h-[250px] overflow-y-auto pr-1">
-              <div className="grid grid-cols-1 gap-2">
+            <div className="max-h-[300px] overflow-y-auto pr-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {availableRooms.map(room => (
                   <Card key={room.number} className={`border ${selectedRooms.includes(room.number) ? 'border-primary' : 'border-muted'}`}>
                     <CardContent className="p-3">
