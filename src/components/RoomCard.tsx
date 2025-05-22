@@ -15,12 +15,22 @@ interface RoomCardProps {
   onCheckOut: (roomNumber: number) => void;
 }
 
+const getCardClass = (status: RoomStatus): string => {
+  switch (status) {
+    case "Available": return "bg-green-100 border-green-500";
+    case "Occupied": return "bg-amber-100 border-amber-500";
+    case "Maintenance": return "bg-gray-200 border-gray-500";
+    case "Cleaning": return "bg-blue-100 border-blue-500";
+    default: return "";
+  }
+};
+
 const getStatusBadgeClass = (status: RoomStatus): string => {
   switch (status) {
-    case "Available": return "status-badge status-available";
-    case "Occupied": return "status-badge status-occupied";
-    case "Maintenance": return "status-badge status-maintenance";
-    case "Cleaning": return "status-badge status-cleaning";
+    case "Available": return "bg-green-500 text-white";
+    case "Occupied": return "bg-amber-500 text-white";
+    case "Maintenance": return "bg-gray-500 text-white";
+    case "Cleaning": return "bg-blue-500 text-white";
     default: return "status-badge";
   }
 };
@@ -35,7 +45,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
   };
 
   return (
-    <Card className="w-full shadow-md overflow-hidden flex flex-col h-full">
+    <Card className={`w-full shadow-md overflow-hidden flex flex-col h-full border-2 ${getCardClass(status)}`}>
       <CardHeader className="p-4 pb-0">
         <div className="flex items-center justify-between">
           <CardTitle className="text-xl">Room {roomNumber}</CardTitle>
@@ -44,7 +54,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
           </span>
         </div>
         <div className="mt-2">
-          <span className={getStatusBadgeClass(status)}>{status}</span>
+          <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusBadgeClass(status)}`}>{status}</span>
         </div>
       </CardHeader>
       
@@ -118,7 +128,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
                   onClick={() => handleStatusChange("Available")}
                   disabled={status === "Available"}
                   variant="outline"
-                  className="status-available text-white"
+                  className="bg-green-500 text-white hover:bg-green-600"
                 >
                   Available
                 </Button>
@@ -126,7 +136,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
                   onClick={() => handleStatusChange("Occupied")}
                   disabled={status === "Occupied"}
                   variant="outline"
-                  className="status-occupied text-white"
+                  className="bg-amber-500 text-white hover:bg-amber-600"
                 >
                   Occupied
                 </Button>
@@ -134,7 +144,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
                   onClick={() => handleStatusChange("Maintenance")}
                   disabled={status === "Maintenance"}
                   variant="outline"
-                  className="status-maintenance text-white"
+                  className="bg-gray-500 text-white hover:bg-gray-600"
                 >
                   Maintenance
                 </Button>
@@ -142,7 +152,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
                   onClick={() => handleStatusChange("Cleaning")}
                   disabled={status === "Cleaning"}
                   variant="outline"
-                  className="status-cleaning text-white"
+                  className="bg-blue-500 text-white hover:bg-blue-600"
                 >
                   Cleaning
                 </Button>
