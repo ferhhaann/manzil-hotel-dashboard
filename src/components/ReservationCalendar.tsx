@@ -44,7 +44,7 @@ const ReservationCalendar: React.FC<ReservationCalendarProps> = ({ reservations 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div className="md:col-span-1">
-        <Card className="w-full md:min-w-[340px] shadow-md border-slate-200">
+        <Card className="w-full md:min-w-[340px] shadow-md">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg flex items-center gap-2">
               <CalendarIcon className="h-5 w-5 text-primary" />
@@ -97,7 +97,7 @@ const ReservationCalendar: React.FC<ReservationCalendarProps> = ({ reservations 
       </div>
 
       <div className="md:col-span-2">
-        <Card className="h-full shadow-md border-slate-200">
+        <Card className="h-full shadow-md">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg flex items-center justify-between flex-wrap gap-2">
               <span className="text-sm md:text-lg flex items-center gap-2">
@@ -122,12 +122,12 @@ const ReservationCalendar: React.FC<ReservationCalendarProps> = ({ reservations 
                 {reservationsForSelectedDate.map((reservation) => (
                   <Card
                     key={reservation.id}
-                    className="cursor-pointer hover:shadow-md transition-shadow border-l-4"
+                    className="cursor-pointer hover:shadow-md transition-shadow border-t-6"
                     style={{
-                      borderLeftColor: 
+                      borderTopColor: 
                         reservation.status === "Confirmed" ? "hsl(142.1, 76.2%, 36.3%)" :
                         reservation.status === "Cancelled" ? "hsl(0, 84.2%, 60.2%)" :
-                        reservation.status === "Checked-in" ? "hsl(220, 70%, 50%)" :  // Updated to blue
+                        reservation.status === "Checked-in" ? "hsl(220, 70%, 50%)" :  // Blue
                         "hsl(43, 100%, 50%)"  // Yellow
                     }}
                     onClick={() => setSelectedReservation(reservation)}
@@ -151,7 +151,7 @@ const ReservationCalendar: React.FC<ReservationCalendarProps> = ({ reservations 
                               : reservation.status === "Cancelled"
                               ? "bg-red-500"
                               : reservation.status === "Checked-in"
-                              ? "bg-blue-500"  // Updated to blue
+                              ? "bg-blue-500"  // Blue
                               : "bg-amber-500" // Yellow
                           } shadow-sm`}
                         >
