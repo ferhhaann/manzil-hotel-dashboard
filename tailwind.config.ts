@@ -65,6 +65,10 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				royal: {
+					DEFAULT: 'hsl(225, 73%, 57%)',
+					dark: 'hsl(225, 73%, 27%)',
 				}
 			},
 			borderRadius: {
@@ -93,7 +97,10 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+			},
+			borderWidth: {
+				'6': '6px',
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
