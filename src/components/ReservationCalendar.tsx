@@ -123,7 +123,7 @@ const ReservationCalendar: React.FC<ReservationCalendarProps> = ({ reservations 
                     key={reservation.id}
                     className="cursor-pointer hover:shadow-md transition-shadow bg-white"
                     style={{
-                      borderTop: '4px solid',
+                      borderTop: '6px solid',
                       borderTopColor: 
                         reservation.status === "Confirmed" ? "hsl(142.1, 76.2%, 36.3%)" :
                         reservation.status === "Cancelled" ? "hsl(0, 84.2%, 60.2%)" :

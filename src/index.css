@@ -111,6 +111,34 @@
   @apply text-transparent bg-clip-text gold-gradient;
 }
 
+/* Card status borders */
+.border-t-status-available {
+  @apply border-t-6 border-t-green-500;
+}
+
+.border-t-status-occupied {
+  @apply border-t-6 border-t-blue-500;
+}
+
+.border-t-status-maintenance {
+  @apply border-t-6 border-t-red-500;
+}
+
+.border-t-status-cleaning {
+  @apply border-t-6 border-t-amber-500;
+}
+
+/* Extending Tailwind with custom border widths */
+@layer utilities {
+  .border-t-6 {
+    border-top-width: 6px;
+  }
+  
+  .border-t-8 {
+    border-top-width: 8px;
+  }
+}
+
 /* Mobile optimization */
 @media (max-width: 640px) {
   .container {

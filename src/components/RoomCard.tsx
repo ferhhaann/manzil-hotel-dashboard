@@ -36,11 +36,11 @@ interface RoomCardProps {
 
 const getCardClass = (status: RoomStatus): string => {
   switch (status) {
-    // Changed to use border-t-4 instead of different background colors
-    case "Available": return "border-t-4 border-t-green-500";
-    case "Occupied": return "border-t-4 border-t-blue-500"; 
-    case "Maintenance": return "border-t-4 border-t-red-500"; 
-    case "Cleaning": return "border-t-4 border-t-amber-500"; 
+    // Changed to use the new border-t-6 classes
+    case "Available": return "border-t-6 border-t-green-500";
+    case "Occupied": return "border-t-6 border-t-blue-500"; 
+    case "Maintenance": return "border-t-6 border-t-red-500"; 
+    case "Cleaning": return "border-t-6 border-t-amber-500"; 
     default: return "";
   }
 };
