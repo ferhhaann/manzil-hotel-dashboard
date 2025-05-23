@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import RoomCard from "@/components/RoomCard";
 import Navbar from "@/components/Navbar";
@@ -209,7 +208,7 @@ const Dashboard = () => {
               <button
                 className={`px-2 py-1 rounded-full text-xs font-medium transition ${
                   filter === "Occupied" 
-                    ? "bg-amber-500 text-white" 
+                    ? "bg-blue-500 text-white" 
                     : "bg-secondary/50 hover:bg-secondary"
                 }`}
                 onClick={() => setFilter("Occupied")}
@@ -219,7 +218,7 @@ const Dashboard = () => {
               <button
                 className={`px-2 py-1 rounded-full text-xs font-medium transition ${
                   filter === "Maintenance" 
-                    ? "bg-gray-500 text-white" 
+                    ? "bg-red-500 text-white" 
                     : "bg-secondary/50 hover:bg-secondary"
                 }`}
                 onClick={() => setFilter("Maintenance")}
@@ -229,7 +228,7 @@ const Dashboard = () => {
               <button
                 className={`px-2 py-1 rounded-full text-xs font-medium transition ${
                   filter === "Cleaning" 
-                    ? "bg-blue-500 text-white" 
+                    ? "bg-amber-500 text-white" 
                     : "bg-secondary/50 hover:bg-secondary"
                 }`}
                 onClick={() => setFilter("Cleaning")}

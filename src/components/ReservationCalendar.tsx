@@ -127,8 +127,8 @@ const ReservationCalendar: React.FC<ReservationCalendarProps> = ({ reservations 
                       borderLeftColor: 
                         reservation.status === "Confirmed" ? "hsl(142.1, 76.2%, 36.3%)" :
                         reservation.status === "Cancelled" ? "hsl(0, 84.2%, 60.2%)" :
-                        reservation.status === "Checked-in" ? "hsl(220.9, 39.3%, 11%)" :
-                        "hsl(47.9, 95.8%, 53.1%)"
+                        reservation.status === "Checked-in" ? "hsl(220, 70%, 50%)" :  // Updated to blue
+                        "hsl(43, 100%, 50%)"  // Yellow
                     }}
                     onClick={() => setSelectedReservation(reservation)}
                   >
@@ -151,8 +151,8 @@ const ReservationCalendar: React.FC<ReservationCalendarProps> = ({ reservations 
                               : reservation.status === "Cancelled"
                               ? "bg-red-500"
                               : reservation.status === "Checked-in"
-                              ? "bg-blue-500"
-                              : "bg-amber-500"
+                              ? "bg-blue-500"  // Updated to blue
+                              : "bg-amber-500" // Yellow
                           } shadow-sm`}
                         >
                           {reservation.status}

@@ -37,9 +37,9 @@ interface RoomCardProps {
 const getCardClass = (status: RoomStatus): string => {
   switch (status) {
     case "Available": return "bg-green-100 border-green-500";
-    case "Occupied": return "bg-amber-100 border-amber-500";
-    case "Maintenance": return "bg-gray-200 border-gray-500";
-    case "Cleaning": return "bg-blue-100 border-blue-500";
+    case "Occupied": return "bg-blue-100 border-blue-500"; // Updated to blue
+    case "Maintenance": return "bg-red-100 border-red-500"; // Updated to red
+    case "Cleaning": return "bg-amber-100 border-amber-500"; // Updated to yellow
     default: return "";
   }
 };
@@ -47,9 +47,9 @@ const getCardClass = (status: RoomStatus): string => {
 const getStatusBadgeClass = (status: RoomStatus): string => {
   switch (status) {
     case "Available": return "bg-green-500 text-white";
-    case "Occupied": return "bg-amber-500 text-white";
-    case "Maintenance": return "bg-gray-500 text-white";
-    case "Cleaning": return "bg-blue-500 text-white";
+    case "Occupied": return "bg-blue-500 text-white"; // Updated to blue
+    case "Maintenance": return "bg-red-500 text-white"; // Updated to red
+    case "Cleaning": return "bg-amber-500 text-white"; // Updated to yellow
     default: return "status-badge";
   }
 };
