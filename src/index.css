@@ -36,11 +36,11 @@
 
     --radius: 0.5rem;
 
-    /* Room status colors - UPDATED */
+    /* Room status colors */
     --status-available: 122 39% 49%;
-    --status-occupied: 220 70% 50%;  /* Changed to blue */
-    --status-maintenance: 0 84% 60%;  /* Changed to red */
-    --status-cleaning: 43 100% 50%;   /* Changed to yellow */
+    --status-occupied: 220 70% 50%;
+    --status-maintenance: 0 84% 60%;
+    --status-cleaning: 43 100% 50%;
   }
 
   .dark {
