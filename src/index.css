@@ -1,13 +1,12 @@
 
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 225 73% 57%; /* Royal blue background */
-    --foreground: 210 40% 98%; /* Light text for contrast with dark background */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -22,8 +21,8 @@
     --secondary: 43 100% 50%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --muted: 225 73% 40%; /* Darker blue for muted elements */
-    --muted-foreground: 210 40% 96.1%; /* Lighter text for muted elements */
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
     --accent: 43 80% 65%;
     --accent-foreground: 222.2 47.4% 11.2%;
@@ -45,7 +44,7 @@
   }
 
   .dark {
-    --background: 225 73% 27%; /* Darker royal blue for dark mode */
+    --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
 
     --card: 222.2 84% 4.9%;
@@ -112,28 +111,6 @@
   @apply text-transparent bg-clip-text gold-gradient;
 }
 
-/* Top border color indicators with increased thickness */
-.border-top-available {
-  @apply border-t-6 border-[hsl(var(--status-available))];
-}
-
-.border-top-occupied {
-  @apply border-t-6 border-[hsl(var(--status-occupied))];
-}
-
-.border-top-maintenance {
-  @apply border-t-6 border-[hsl(var(--status-maintenance))];
-}
-
-.border-top-cleaning {
-  @apply border-t-6 border-[hsl(var(--status-cleaning))];
-}
-
-/* Custom border width class */
-.border-t-6 {
-  border-top-width: 6px;
-}
-
 /* Mobile optimization */
 @media (max-width: 640px) {
   .container {
@@ -145,4 +122,3 @@
     word-break: break-word;
   }
 }
-
