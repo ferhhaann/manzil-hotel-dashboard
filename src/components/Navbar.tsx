@@ -29,7 +29,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-0 z-10 border-b bg-primary text-primary-foreground shadow-md">
+    <header className="sticky top-0 z-10 border-b bg-primary text-white shadow-md">
       <div className="container flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-2">
           <Link to="/" className="flex items-center gap-2">
@@ -43,7 +43,7 @@ const Navbar = () => {
 
         {/* Mobile menu button */}
         <button 
-          className="md:hidden p-2 text-primary-foreground"
+          className="md:hidden p-2 text-white"
           onClick={toggleMobileMenu}
           aria-label="Toggle menu"
         >
@@ -54,25 +54,25 @@ const Navbar = () => {
         <nav className="hidden md:flex items-center gap-6">
           <Link 
             to="/dashboard" 
-            className={`text-sm font-medium transition-colors ${isActiveRoute('/dashboard') ? 'border-b-2 border-primary-foreground font-bold' : 'hover:text-secondary-foreground'}`}
+            className={`text-sm font-medium transition-colors ${isActiveRoute('/dashboard') ? 'border-b-2 border-white font-bold' : 'hover:text-secondary-foreground'}`}
           >
             Dashboard
           </Link>
           <Link 
             to="/reservations" 
-            className={`text-sm font-medium transition-colors ${isActiveRoute('/reservations') ? 'border-b-2 border-primary-foreground font-bold' : 'hover:text-secondary-foreground'}`}
+            className={`text-sm font-medium transition-colors ${isActiveRoute('/reservations') ? 'border-b-2 border-white font-bold' : 'hover:text-secondary-foreground'}`}
           >
             Reservations
           </Link>
           <Link 
             to="/reports" 
-            className={`text-sm font-medium transition-colors ${isActiveRoute('/reports') ? 'border-b-2 border-primary-foreground font-bold' : 'hover:text-secondary-foreground'}`}
+            className={`text-sm font-medium transition-colors ${isActiveRoute('/reports') ? 'border-b-2 border-white font-bold' : 'hover:text-secondary-foreground'}`}
           >
             Reports
           </Link>
           <Link 
             to="/finance" 
-            className={`text-sm font-medium transition-colors ${isActiveRoute('/finance') ? 'border-b-2 border-primary-foreground font-bold' : 'hover:text-secondary-foreground'}`}
+            className={`text-sm font-medium transition-colors ${isActiveRoute('/finance') ? 'border-b-2 border-white font-bold' : 'hover:text-secondary-foreground'}`}
           >
             Finance
           </Link>
@@ -84,28 +84,28 @@ const Navbar = () => {
             <nav className="flex flex-col py-4">
               <Link 
                 to="/dashboard" 
-                className={`px-4 py-2 text-sm font-medium ${isActiveRoute('/dashboard') ? 'bg-accent text-accent-foreground' : 'hover:bg-accent/50'}`}
+                className={`px-4 py-2 text-sm font-medium ${isActiveRoute('/dashboard') ? 'bg-accent text-white' : 'hover:bg-accent/50'}`}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Dashboard
               </Link>
               <Link 
                 to="/reservations" 
-                className={`px-4 py-2 text-sm font-medium ${isActiveRoute('/reservations') ? 'bg-accent text-accent-foreground' : 'hover:bg-accent/50'}`}
+                className={`px-4 py-2 text-sm font-medium ${isActiveRoute('/reservations') ? 'bg-accent text-white' : 'hover:bg-accent/50'}`}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Reservations
               </Link>
               <Link 
                 to="/reports" 
-                className={`px-4 py-2 text-sm font-medium ${isActiveRoute('/reports') ? 'bg-accent text-accent-foreground' : 'hover:bg-accent/50'}`}
+                className={`px-4 py-2 text-sm font-medium ${isActiveRoute('/reports') ? 'bg-accent text-white' : 'hover:bg-accent/50'}`}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Reports
               </Link>
               <Link 
                 to="/finance" 
-                className={`px-4 py-2 text-sm font-medium ${isActiveRoute('/finance') ? 'bg-accent text-accent-foreground' : 'hover:bg-accent/50'}`}
+                className={`px-4 py-2 text-sm font-medium ${isActiveRoute('/finance') ? 'bg-accent text-white' : 'hover:bg-accent/50'}`}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Finance
@@ -118,7 +118,7 @@ const Navbar = () => {
                       handleLogout();
                       setMobileMenuOpen(false);
                     }}
-                    className="w-full bg-transparent text-primary-foreground border-primary-foreground hover:bg-accent/50"
+                    className="w-full bg-transparent text-white border-white hover:bg-accent/50"
                   >
                     Logout
                   </Button>
@@ -137,7 +137,7 @@ const Navbar = () => {
               <Button 
                 variant="outline" 
                 onClick={handleLogout}
-                className="bg-transparent text-primary-foreground border-primary-foreground hover:bg-accent/50"
+                className="bg-transparent text-white border-white hover:bg-accent/50"
               >
                 Logout
               </Button>
