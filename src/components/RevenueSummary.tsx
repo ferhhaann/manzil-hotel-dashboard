@@ -14,7 +14,7 @@ interface RevenueSummaryProps {
 const RevenueSummary = ({ totalSales, totalExpenses, revenue, month, period }: RevenueSummaryProps) => {
   return (
     <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-      <Card className="bg-green-50">
+      <Card className="border-t-6 border-green-500 shadow-md">
         <CardContent className="p-4 md:p-6">
           <div className="flex items-center justify-between space-y-0">
             <div>
@@ -32,7 +32,7 @@ const RevenueSummary = ({ totalSales, totalExpenses, revenue, month, period }: R
         </CardContent>
       </Card>
       
-      <Card className="bg-red-50">
+      <Card className="border-t-6 border-red-500 shadow-md">
         <CardContent className="p-4 md:p-6">
           <div className="flex items-center justify-between space-y-0">
             <div>
@@ -50,15 +50,15 @@ const RevenueSummary = ({ totalSales, totalExpenses, revenue, month, period }: R
         </CardContent>
       </Card>
       
-      <Card className="bg-blue-50 sm:col-span-2 md:col-span-1">
+      <Card className="border-t-6 border-navy-500 shadow-md sm:col-span-2 md:col-span-1">
         <CardContent className="p-4 md:p-6">
           <div className="flex items-center justify-between space-y-0">
             <div>
               <p className="text-sm font-medium leading-none text-muted-foreground mb-1">Net Revenue</p>
               <h3 className="text-xl md:text-2xl font-bold">₹ {revenue.toLocaleString()}</h3>
             </div>
-            <div className="bg-blue-100 p-2 rounded-full">
-              <Landmark className="h-4 w-4 text-blue-600" />
+            <div className="bg-navy-100 p-2 rounded-full">
+              <Landmark className="h-4 w-4 text-navy-600" />
             </div>
           </div>
           <div className="flex items-center gap-1 text-xs text-muted-foreground mt-2">

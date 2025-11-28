@@ -60,7 +60,7 @@ const Index = () => {
               alt="Manzil Hotel Logo" 
               className="h-10" 
             />
-        <p className="text-muted-foreground text-lg">Management System</p>
+        <p className="text-white text-lg">Management System</p>
       </div>
 
       <Card className="w-full max-w-md shadow-lg">
@@ -105,7 +105,7 @@ const Index = () => {
         </form>
       </Card>
       
-      <div className="mt-8 text-center text-sm text-muted-foreground">
+      <div className="mt-8 text-center text-sm text-white">
         <p>For demo, use: <br />username: admin or staff<br />password: password</p>
       </div>
     </div>

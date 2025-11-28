@@ -1,11 +1,10 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 220 70% 95%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -14,55 +13,55 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    /* Blue theme */
-    --primary: 220 78% 22%;
+    /* Navy blue theme */
+    --primary: 220 70% 20%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 43 100% 50%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 60% 40%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 210 40% 96.1%;
+    --muted: 220 40% 90%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 43 80% 65%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 220 40% 30%;
+    --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 30% 80%;
+    --input: 220 30% 80%;
+    --ring: 220 60% 30%;
 
     --radius: 0.5rem;
 
     /* Room status colors */
     --status-available: 122 39% 49%;
-    --status-occupied: 220 70% 50%;
-    --status-maintenance: 0 84% 60%;
-    --status-cleaning: 43 100% 50%;
+    --status-occupied: 220 70% 50%;  /* Blue */
+    --status-maintenance: 0 84% 60%;  /* Red */
+    --status-cleaning: 43 100% 50%;   /* Yellow */
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 220 70% 10%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 220 70% 15%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 220 70% 15%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
+    --primary: 220 70% 50%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
-    --secondary: 43 100% 50%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 60% 40%;
+    --secondary-foreground: 210 40% 98%;
 
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 220 40% 30%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -108,35 +107,23 @@
 }
 
 .hotel-title {
-  @apply text-transparent bg-clip-text gold-gradient;
+  @apply text-transparent bg-clip-text;
+  background: linear-gradient(135deg, #4169E1 0%, #000080 100%);
 }
 
-/* Card status borders */
-.border-t-status-available {
-  @apply border-t-6 border-t-green-500;
+/* Navy theme specific styles */
+.navy-gradient {
+  background: linear-gradient(135deg, #4169E1 0%, #000080 100%);
 }
 
-.border-t-status-occupied {
-  @apply border-t-6 border-t-blue-500;
+/* Thicker border styles for cards */
+.border-t-status {
+  @apply border-t-6;
 }
 
-.border-t-status-maintenance {
-  @apply border-t-6 border-t-red-500;
-}
-
-.border-t-status-cleaning {
-  @apply border-t-6 border-t-amber-500;
-}
-
-/* Extending Tailwind with custom border widths */
-@layer utilities {
-  .border-t-6 {
-    border-top-width: 6px;
-  }
-  
-  .border-t-8 {
-    border-top-width: 8px;
-  }
+/* Custom border width */
+.border-t-6 {
+  border-top-width: 6px;
 }
 
 /* Mobile optimization */
