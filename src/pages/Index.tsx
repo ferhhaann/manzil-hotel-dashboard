@@ -96,7 +96,7 @@ const Index = () => {
           <CardFooter>
             <Button 
               type="submit" 
-              className="w-full gold-gradient text-primary hover:opacity-90 transition-opacity"
+              className="w-full bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
               disabled={isLoading}
             >
               {isLoading ? "Logging in..." : "Login"}
