@@ -5,71 +5,71 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 220 20% 20%;
+    --foreground: 0 0% 20%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 20% 20%;
+    --card-foreground: 0 0% 20%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 20%;
+    --popover-foreground: 0 0% 20%;
 
-    /* White with pastel accents */
-    --primary: 217 91% 60%;
+    /* White with warm pastel accents */
+    --primary: 350 80% 65%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 220 20% 20%;
+    --secondary: 340 30% 96%;
+    --secondary-foreground: 0 0% 20%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 220 10% 45%;
+    --muted: 340 20% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 262 83% 70%;
+    --accent: 160 60% 50%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 95%;
-    --ring: 217 91% 60%;
+    --border: 340 20% 91%;
+    --input: 340 20% 95%;
+    --ring: 350 80% 65%;
 
     --radius: 0.5rem;
 
     /* Room status colors - pastel */
-    --status-available: 152 60% 52%;
-    --status-occupied: 217 91% 60%;
-    --status-maintenance: 0 84% 60%;
-    --status-cleaning: 38 92% 60%;
+    --status-available: 160 60% 50%;
+    --status-occupied: 350 80% 65%;
+    --status-maintenance: 0 70% 60%;
+    --status-cleaning: 38 80% 60%;
   }
 
   .dark {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
+    --background: 0 0% 10%;
+    --foreground: 0 0% 98%;
 
-    --card: 222 47% 14%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 14%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 222 47% 14%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 14%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 217 91% 60%;
+    --primary: 350 80% 65%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 217 33% 25%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 350 20% 20%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 217 33% 20%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 262 83% 70%;
+    --accent: 160 60% 50%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62% 50%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 217 33% 25%;
-    --input: 217 33% 25%;
-    --ring: 217 91% 60%;
+    --border: 0 0% 22%;
+    --input: 0 0% 22%;
+    --ring: 350 80% 65%;
   }
 }
 
@@ -83,7 +83,7 @@
 }
 
 .primary-gradient {
-  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+  background: linear-gradient(135deg, #f472b6 0%, #34d399 100%);
 }
 
 .status-badge {
@@ -108,7 +108,7 @@
 
 .hotel-title {
   @apply text-transparent bg-clip-text;
-  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+  background: linear-gradient(135deg, #f472b6 0%, #34d399 100%);
 }
 
 /* Thicker border styles for cards */

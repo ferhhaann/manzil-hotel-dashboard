@@ -57,14 +57,14 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				pastel: {
-					blue: '#60a5fa',
-					purple: '#a78bfa',
-					pink: '#f472b6',
-					green: '#4ade80',
-					yellow: '#facc15',
-					orange: '#fb923c',
-					cyan: '#22d3ee',
+					coral: '#f472b6',
+					mint: '#34d399',
+					peach: '#fb923c',
+					lavender: '#c4b5fd',
 					rose: '#fb7185',
+					sage: '#86efac',
+					cream: '#fef3c7',
+					blush: '#fecdd3',
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
