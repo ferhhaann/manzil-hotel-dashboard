@@ -53,14 +53,14 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-primary/5 to-primary/10 p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4">
       <div className="flex flex-col items-center mb-8">
         <img 
               src="/lovable-uploads/aabbf551-1fea-4b30-9bdc-62fe62e54f5d.png" 
               alt="Manzil Hotel Logo" 
               className="h-10" 
             />
-        <p className="text-white text-lg">Management System</p>
+        <p className="text-muted-foreground text-lg">Management System</p>
       </div>
 
       <Card className="w-full max-w-md shadow-lg">
@@ -96,7 +96,7 @@ const Index = () => {
           <CardFooter>
             <Button 
               type="submit" 
-              className="w-full gold-gradient text-primary hover:opacity-90 transition-opacity"
+              className="w-full"
               disabled={isLoading}
             >
               {isLoading ? "Logging in..." : "Login"}
@@ -105,7 +105,7 @@ const Index = () => {
         </form>
       </Card>
       
-      <div className="mt-8 text-center text-sm text-white">
+      <div className="mt-8 text-center text-sm text-muted-foreground">
         <p>For demo, use: <br />username: admin or staff<br />password: password</p>
       </div>
     </div>
