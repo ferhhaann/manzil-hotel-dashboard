@@ -13,55 +13,55 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 10%;
 
-    /* Gold and white theme */
-    --primary: 45 100% 51%;
-    --primary-foreground: 0 0% 10%;
+    /* Clean white theme */
+    --primary: 0 0% 15%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 43 96% 90%;
+    --secondary: 0 0% 96%;
     --secondary-foreground: 0 0% 10%;
 
-    --muted: 45 20% 96%;
+    --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
 
-    --accent: 38 92% 50%;
+    --accent: 0 0% 20%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 45 30% 90%;
-    --input: 45 30% 95%;
-    --ring: 45 100% 51%;
+    --border: 0 0% 90%;
+    --input: 0 0% 95%;
+    --ring: 0 0% 15%;
 
     --radius: 0.5rem;
 
     /* Room status colors */
     --status-available: 122 39% 49%;
-    --status-occupied: 45 100% 51%;
+    --status-occupied: 220 70% 50%;
     --status-maintenance: 0 84% 60%;
     --status-cleaning: 43 100% 50%;
   }
 
   .dark {
-    --background: 0 0% 10%;
+    --background: 0 0% 8%;
     --foreground: 0 0% 98%;
 
-    --card: 0 0% 15%;
+    --card: 0 0% 12%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 15%;
+    --popover: 0 0% 12%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 45 100% 51%;
+    --primary: 0 0% 98%;
     --primary-foreground: 0 0% 10%;
 
-    --secondary: 43 96% 20%;
+    --secondary: 0 0% 20%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 0 0% 20%;
+    --muted: 0 0% 18%;
     --muted-foreground: 0 0% 65%;
 
-    --accent: 38 92% 50%;
+    --accent: 0 0% 25%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 30.6%;
@@ -69,7 +69,7 @@
 
     --border: 0 0% 20%;
     --input: 0 0% 20%;
-    --ring: 45 100% 51%;
+    --ring: 0 0% 98%;
   }
 }
 
@@ -82,8 +82,8 @@
   }
 }
 
-.gold-gradient {
-  background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%);
+.primary-gradient {
+  background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
 }
 
 .status-badge {
@@ -108,7 +108,7 @@
 
 .hotel-title {
   @apply text-transparent bg-clip-text;
-  background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%);
+  background: linear-gradient(135deg, #333333 0%, #1a1a1a 100%);
 }
 
 /* Thicker border styles for cards */
