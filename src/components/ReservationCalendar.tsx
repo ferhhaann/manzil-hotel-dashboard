@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -122,13 +121,14 @@ const ReservationCalendar: React.FC<ReservationCalendarProps> = ({ reservations 
                 {reservationsForSelectedDate.map((reservation) => (
                   <Card
                     key={reservation.id}
-                    className="cursor-pointer hover:shadow-md transition-shadow border-t-6"
+                    className="cursor-pointer hover:shadow-md transition-shadow bg-white"
                     style={{
+                      borderTop: '6px solid',
                       borderTopColor: 
                         reservation.status === "Confirmed" ? "hsl(142.1, 76.2%, 36.3%)" :
                         reservation.status === "Cancelled" ? "hsl(0, 84.2%, 60.2%)" :
-                        reservation.status === "Checked-in" ? "hsl(220, 70%, 50%)" :  // Blue
-                        "hsl(43, 100%, 50%)"  // Yellow
+                        reservation.status === "Checked-in" ? "hsl(220, 70%, 50%)" :
+                        "hsl(43, 100%, 50%)"
                     }}
                     onClick={() => setSelectedReservation(reservation)}
                   >
@@ -151,8 +151,8 @@ const ReservationCalendar: React.FC<ReservationCalendarProps> = ({ reservations 
                               : reservation.status === "Cancelled"
                               ? "bg-red-500"
                               : reservation.status === "Checked-in"
-                              ? "bg-blue-500"  // Blue
-                              : "bg-amber-500" // Yellow
+                              ? "bg-blue-500"
+                              : "bg-amber-500"
                           } shadow-sm`}
                         >
                           {reservation.status}

@@ -29,7 +29,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-0 z-10 border-b bg-primary text-white shadow-md">
+    <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur">
       <div className="container flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-2">
           <Link to="/" className="flex items-center gap-2">
@@ -43,7 +43,7 @@ const Navbar = () => {
 
         {/* Mobile menu button */}
         <button 
-          className="md:hidden p-2 text-white"
+          className="md:hidden p-2 text-primary"
           onClick={toggleMobileMenu}
           aria-label="Toggle menu"
         >
@@ -54,25 +54,25 @@ const Navbar = () => {
         <nav className="hidden md:flex items-center gap-6">
           <Link 
             to="/dashboard" 
-            className={`text-sm font-medium transition-colors ${isActiveRoute('/dashboard') ? 'border-b-2 border-white font-bold' : 'hover:text-secondary-foreground'}`}
+            className={`text-sm font-medium transition-colors ${isActiveRoute('/dashboard') ? 'text-primary border-b-2 border-primary' : 'hover:text-primary'}`}
           >
             Dashboard
           </Link>
           <Link 
             to="/reservations" 
-            className={`text-sm font-medium transition-colors ${isActiveRoute('/reservations') ? 'border-b-2 border-white font-bold' : 'hover:text-secondary-foreground'}`}
+            className={`text-sm font-medium transition-colors ${isActiveRoute('/reservations') ? 'text-primary border-b-2 border-primary' : 'hover:text-primary'}`}
           >
             Reservations
           </Link>
           <Link 
             to="/reports" 
-            className={`text-sm font-medium transition-colors ${isActiveRoute('/reports') ? 'border-b-2 border-white font-bold' : 'hover:text-secondary-foreground'}`}
+            className={`text-sm font-medium transition-colors ${isActiveRoute('/reports') ? 'text-primary border-b-2 border-primary' : 'hover:text-primary'}`}
           >
             Reports
           </Link>
           <Link 
             to="/finance" 
-            className={`text-sm font-medium transition-colors ${isActiveRoute('/finance') ? 'border-b-2 border-white font-bold' : 'hover:text-secondary-foreground'}`}
+            className={`text-sm font-medium transition-colors ${isActiveRoute('/finance') ? 'text-primary border-b-2 border-primary' : 'hover:text-primary'}`}
           >
             Finance
           </Link>
@@ -80,45 +80,45 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="absolute top-16 left-0 right-0 bg-primary border-b shadow-lg md:hidden">
+          <div className="absolute top-16 left-0 right-0 bg-background border-b shadow-lg md:hidden">
             <nav className="flex flex-col py-4">
               <Link 
                 to="/dashboard" 
-                className={`px-4 py-2 text-sm font-medium ${isActiveRoute('/dashboard') ? 'bg-accent text-white' : 'hover:bg-accent/50'}`}
+                className={`px-4 py-2 text-sm font-medium ${isActiveRoute('/dashboard') ? 'text-primary bg-primary/10' : 'hover:text-primary'}`}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Dashboard
               </Link>
               <Link 
                 to="/reservations" 
-                className={`px-4 py-2 text-sm font-medium ${isActiveRoute('/reservations') ? 'bg-accent text-white' : 'hover:bg-accent/50'}`}
+                className={`px-4 py-2 text-sm font-medium ${isActiveRoute('/reservations') ? 'text-primary bg-primary/10' : 'hover:text-primary'}`}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Reservations
               </Link>
               <Link 
                 to="/reports" 
-                className={`px-4 py-2 text-sm font-medium ${isActiveRoute('/reports') ? 'bg-accent text-white' : 'hover:bg-accent/50'}`}
+                className={`px-4 py-2 text-sm font-medium ${isActiveRoute('/reports') ? 'text-primary bg-primary/10' : 'hover:text-primary'}`}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Reports
               </Link>
               <Link 
                 to="/finance" 
-                className={`px-4 py-2 text-sm font-medium ${isActiveRoute('/finance') ? 'bg-accent text-white' : 'hover:bg-accent/50'}`}
+                className={`px-4 py-2 text-sm font-medium ${isActiveRoute('/finance') ? 'text-primary bg-primary/10' : 'hover:text-primary'}`}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Finance
               </Link>
               {user && (
-                <div className="px-4 py-2 border-t border-accent mt-2">
+                <div className="px-4 py-2 border-t mt-2">
                   <Button 
                     variant="outline" 
                     onClick={() => {
                       handleLogout();
                       setMobileMenuOpen(false);
                     }}
-                    className="w-full bg-transparent text-white border-white hover:bg-accent/50"
+                    className="w-full"
                   >
                     Logout
                   </Button>
@@ -137,7 +137,6 @@ const Navbar = () => {
               <Button 
                 variant="outline" 
                 onClick={handleLogout}
-                className="bg-transparent text-white border-white hover:bg-accent/50"
               >
                 Logout
               </Button>

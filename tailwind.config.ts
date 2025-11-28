@@ -56,16 +56,6 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				pastel: {
-					coral: '#f472b6',
-					mint: '#34d399',
-					peach: '#fb923c',
-					lavender: '#c4b5fd',
-					rose: '#fb7185',
-					sage: '#86efac',
-					cream: '#fef3c7',
-					blush: '#fecdd3',
-				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -76,9 +66,6 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				}
-			},
-			borderWidth: {
-				'6': '6px',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

@@ -36,10 +36,11 @@ interface RoomCardProps {
 
 const getCardClass = (status: RoomStatus): string => {
   switch (status) {
-    case "Available": return "bg-green-100 border-green-500";
-    case "Occupied": return "bg-blue-100 border-blue-500"; // Updated to blue
-    case "Maintenance": return "bg-red-100 border-red-500"; // Updated to red
-    case "Cleaning": return "bg-amber-100 border-amber-500"; // Updated to yellow
+    // Changed to use the new border-t-6 classes
+    case "Available": return "border-t-6 border-t-green-500";
+    case "Occupied": return "border-t-6 border-t-blue-500"; 
+    case "Maintenance": return "border-t-6 border-t-red-500"; 
+    case "Cleaning": return "border-t-6 border-t-amber-500"; 
     default: return "";
   }
 };
@@ -47,9 +48,9 @@ const getCardClass = (status: RoomStatus): string => {
 const getStatusBadgeClass = (status: RoomStatus): string => {
   switch (status) {
     case "Available": return "bg-green-500 text-white";
-    case "Occupied": return "bg-blue-500 text-white"; // Updated to blue
-    case "Maintenance": return "bg-red-500 text-white"; // Updated to red
-    case "Cleaning": return "bg-amber-500 text-white"; // Updated to yellow
+    case "Occupied": return "bg-blue-500 text-white";
+    case "Maintenance": return "bg-red-500 text-white";
+    case "Cleaning": return "bg-amber-500 text-white";
     default: return "status-badge";
   }
 };
@@ -180,7 +181,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onStatusUpdate, onCheckIn, on
 
   
   return (
-    <Card className={`w-full shadow-sm overflow-hidden flex flex-col h-full border-2 ${getCardClass(status)}`}>
+    <Card className={`w-full shadow-sm overflow-hidden flex flex-col h-full bg-white ${getCardClass(status)}`}>
       <CardHeader className="p-2 pb-0">
         <div className="flex items-center justify-between">
           <CardTitle className="text-base">Room {roomNumber}</CardTitle>
